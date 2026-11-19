@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CS 1130 – Introduction to Computing</title>
+  <!-- Fonts (if offline, the page falls back to system fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Exo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Saira+Stencil+One&family=Russo+One&family=Permanent+Marker&family=Black+Ops+One&family=Michroma&display=swap">
+  <!-- Browser tab icon (can be changed on the Branding page) -->
+  <link rel="icon" id="favicon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2714%27%20fill%3D%27%23080812%27/%3E%3Crect%20x%3D%273%27%20y%3D%273%27%20width%3D%2758%27%20height%3D%2758%27%20rx%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%2300f5ff%27%20stroke-width%3D%273%27/%3E%3Cpath%20d%3D%27M24%2022%2014%2032l10%2010M40%2022l10%2010-10%2010M35%2018l-6%2028%27%20fill%3D%27none%27%20stroke%3D%27%2300f5ff%27%20stroke-width%3D%274%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27/%3E%3C/svg%3E">
+  <!-- External stylesheet: controls the look of the page -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Decorative background layers (grid, glow, scanlines) -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="bg-scanlines" aria-hidden="true"></div>
+
+  <!-- ========== HEADER & NAVIGATION ========== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#home" aria-label="Home">
+        <span class="logo-mark" data-brand-slot="main"><!-- logo set in branding.js (SITE_LOGOS.main) --></span>
+        <span class="logo-text"><span class="logo-line">Wake Up,</span> <span class="logo-accent">Choom</span></span>
+      </a>
+      <nav class="main-nav">
+        <a class="nav-link" href="#home" data-nav="home">Home</a>
+        <!-- Projects dropdown menu -->
+        <div class="dropdown">
+          <button type="button" class="nav-link" id="assignmentsMenuButton" aria-expanded="false">Projects <span class="caret">▾</span></button>
+          <div class="dropdown-menu" id="assignmentsMenu">
+            <a href="#assignment1"><span class="menu-num">01</span> Conversion Calculator</a>
+            <a href="#assignment2"><span class="menu-num">02</span> Income Tax Calculator</a>
+            <a href="#assignment3"><span class="menu-num">03</span> Mathematical Operations Using Loops</a>
+            <a href="#assignment4"><span class="menu-num">04</span> Simple Payroll System</a>
+          </div>
+        </div>
+        <a class="nav-link" href="#about" data-nav="about">About</a>
+        <a class="nav-link nav-icon" href="#branding" data-nav="branding" aria-label="Branding settings" title="Branding settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Each "page" below is shown one at a time by script.js -->
+  <main>
+
+    <!-- ========== HOME (front page) ========== -->
+    <div class="page" data-page="home">
+
+      <!-- Hero -->
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-text">
+            <p class="eyebrow"><span class="status-dot"></span> System online · Secure connection</p>
+            <h1 class="hero-title">Connection Established. Welcome, Runner.</h1>
+            <p class="hero-subtitle">
+              You've entered a new network. Explore, discover, and make your mark.
+              The system is yours to navigate.
+            </p>
+            <div class="hero-buttons">
+              <a class="btn btn-primary" href="#projects">View Projects</a>
+              <a class="btn btn-ghost" href="#about">About the Course</a>
+            </div>
+          </div>
+
+          <!-- Decorative terminal window -->
+          <div class="terminal" aria-hidden="true">
+            <div class="terminal-bar">
+              <span></span><span></span><span></span>
+              <p>cs1130@terminal:~</p>
+            </div>
+            <pre class="terminal-body"><span class="t-prompt">$</span> load projects
+<span class="t-ok">[ OK ]</span> 01 conversion.js
+<span class="t-ok">[ OK ]</span> 02 income_tax.js
+<span class="t-ok">[ OK ]</span> 03 loops.js
+<span class="t-ok">[ OK ]</span> 04 payroll.js
+<span class="t-dim">4 modules online.</span>
+<span class="t-prompt">$</span> <span class="t-cursor">_</span></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Project cards: cards fill the left column first (1, 2), then the right (3, 4).
+           Copy one card block to add another card. -->
+      <section class="cards-section" id="projects">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">// Student Assignments</p>
+            <h2>Projects</h2>
+          </div>
+
+          <div class="card-grid">
+
+            <div class="assignment-card" data-card-theme="street">
+              <div class="card-top">
+                <span class="card-icon" data-brand-slot="project1"><!-- logo set in branding.js (SITE_LOGOS.project1) --></span>
+                <span class="card-badge">PROJECT 01</span>
+              </div>
+              <h3>Conversion Calculator</h3>
+              <p class="card-sentence">Convert temperature and length values between units.</p>
+              <ul class="card-items card-items-two">
+                <li><span>Celsius to Fahrenheit</span></li>
+                <li><span>Fahrenheit to Celsius</span></li>
+                <li><span>Meters to Feet</span></li>
+                <li><span>Feet to Meters</span></li>
+              </ul>
+              <div class="card-footer">
+                <a class="btn btn-small" href="#assignment1">Open project <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+
+            <div class="assignment-card" data-card-theme="military">
+              <div class="card-top">
+                <span class="card-icon" data-brand-slot="project2"><!-- logo set in branding.js (SITE_LOGOS.project2) --></span>
+                <span class="card-badge">PROJECT 02</span>
+              </div>
+              <h3>Income Tax Calculator</h3>
+              <p class="card-sentence">Compute Philippine income tax using the TRAIN Law graduated tax table.</p>
+              <ul class="card-items">
+                <li><span>Monthly or annual income</span></li>
+                <li><span>Step-by-step computation</span></li>
+              </ul>
+              <div class="card-footer">
+                <a class="btn btn-small" href="#assignment2">Open project <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+
+            <div class="assignment-card" data-card-theme="medical">
+              <div class="card-top">
+                <span class="card-icon" data-brand-slot="project3"><!-- logo set in branding.js (SITE_LOGOS.project3) --></span>
+                <span class="card-badge">PROJECT 03</span>
+              </div>
+              <h3>Mathematical Operations Using Loops</h3>
+              <p class="card-sentence">Enter N to compute the factorial, sum, and average with three different loops.</p>
+              <ul class="card-items">
+                <li><span>Factorial</span> <span class="card-tag">While Loop</span></li>
+                <li><span>Sum</span> <span class="card-tag">Do While Loop</span></li>
+                <li><span>Average</span> <span class="card-tag">For Loop</span></li>
+              </ul>
+              <div class="card-footer">
+                <a class="btn btn-small" href="#assignment3">Open project <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+
+            <div class="assignment-card" data-card-theme="corp">
+              <div class="card-top">
+                <span class="card-icon" data-brand-slot="project4"><!-- logo set in branding.js (SITE_LOGOS.project4) --></span>
+                <span class="card-badge">PROJECT 04</span>
+              </div>
+              <h3>Simple Payroll System</h3>
+              <p class="card-sentence">Compute an employee's gross salary, deductions, and net salary.</p>
+              <ul class="card-items">
+                <li><span>Gross salary</span></li>
+                <li><span>Total deductions</span></li>
+                <li><span>Net salary</span></li>
+              </ul>
+              <div class="card-footer">
+                <a class="btn btn-small" href="#assignment4">Open project <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========== ABOUT ========== -->
+    <div class="page" data-page="about" hidden>
+      <div class="container page-content">
+        <article class="box">
+          <div class="about-header">
+            <div>
+              <p class="eyebrow">// System Info</p>
+              <h2 class="page-title">About</h2>
+            </div>
+            <!-- University logo (can be changed on the Branding page) -->
+            <span class="uni-logo" data-brand-slot="university" title="University logo"><!-- logo set in branding.js (SITE_LOGOS.university) --></span>
+          </div>
+          <p class="page-intro">
+            This website contains the four class projects, built with HTML
+            (structure), CSS (design), and JavaScript (calculations and buttons).
+          </p>
+          <div class="about-grid">
+            <div class="info-tile">
+              <span class="info-label">Course</span>
+              <span class="info-value">CS 1130 – Introduction to Computing</span>
+            </div>
+            <div class="info-tile">
+              <span class="info-label">Projects</span>
+              <span class="info-value">4 programming assignments</span>
+            </div>
+            <div class="info-tile">
+              <span class="info-label">Built with</span>
+              <span class="info-value">HTML, CSS, and vanilla JavaScript</span>
+            </div>
+            <div class="info-tile">
+              <span class="info-label">Class Instructor</span>
+              <span class="info-value">John Roy A. Geralde</span>
+            </div>
+          </div>
+          <div class="about-stack">
+            <span class="card-tag">HTML · Structure</span>
+            <span class="card-tag">CSS · Design</span>
+            <span class="card-tag">JavaScript · Logic</span>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- ========== BRANDING SETTINGS ========== -->
+    <!-- The logo cards inside #brandingSlots are built by branding.js -->
+    <div class="page" data-page="branding" hidden>
+      <div class="container page-content">
+        <article class="box">
+          <p class="eyebrow">// Settings</p>
+          <h2 class="page-title">Branding</h2>
+          <p class="page-intro">
+            Change the website's logos here. Choose an image, check the preview, then
+            click <em>Apply</em>. Changes are saved in this browser, so they stay after
+            you refresh the page. Supported formats: PNG, JPG, SVG, and WebP (up to 2 MB).
+          </p>
+          <div class="brand-grid" id="brandingSlots"></div>
+          <div class="brand-footer">
+            <button type="button" class="btn-ghost" id="brandRestoreAll">Restore all default logos</button>
+            <p class="brand-status" id="brandGlobalStatus" role="status"></p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- ========== PROJECT PAGES ========== -->
+    <div class="container page-content">
+
+        <!-- ===== Project #1: Conversion ===== -->
+        <article class="box page" data-page="assignment1" data-page-theme="street" hidden>
+          <!-- Page header: project logo (set in branding.js, SITE_LOGOS.project1) and title -->
+          <div class="page-head">
+            <span class="card-icon page-logo" data-brand-slot="project1"></span>
+            <div>
+              <p class="eyebrow">// Project 01</p>
+              <h3 class="page-title">Conversion Calculator</h3>
+            </div>
+          </div>
+          <p class="page-intro">Enter a value, choose a conversion, then click <em>Convert</em>.</p>
+
+          <div class="panel">
+            <div class="form-row">
+              <div>
+                <label for="convertValue">Value</label>
+                <input type="number" id="convertValue" step="any" placeholder="e.g. 100">
+              </div>
+              <div>
+                <label for="convertType">Conversion type</label>
+                <select id="convertType">
+                  <option value="cToF">Celsius to Fahrenheit</option>
+                  <option value="fToC">Fahrenheit to Celsius</option>
+                  <option value="mToFt">Meters to Feet</option>
+                  <option value="ftToM">Feet to Meters</option>
+                </select>
+              </div>
+            </div>
+            <button type="button" id="convertButton">Convert</button>
+            <div class="result result-readout" id="convertResult"></div>
+          </div>
+
+          <details>
+            <summary>Formulas used</summary>
+            <ul>
+              <li>°F = (°C × 9/5) + 32</li>
+              <li>°C = (°F − 32) × 5/9</li>
+              <li>feet = meters × 3.28084</li>
+              <li>meters = feet ÷ 3.28084</li>
+            </ul>
+          </details>
+
+          <!-- Links to the previous and next project -->
+          <nav class="project-nav">
+            <a class="project-nav-link" href="#home">
+              <span class="hint">← Back</span>
+              <strong>Home</strong>
+            </a>
+            <a class="project-nav-link project-nav-next" href="#assignment2">
+              <span class="hint">Next project →</span>
+              <strong>Income Tax Calculator</strong>
+            </a>
+          </nav>
+        </article>
+
+        <!-- ===== Project #2: Income Tax ===== -->
+        <article class="box page" data-page="assignment2" data-page-theme="military" hidden>
+          <!-- Page header: project logo (set in branding.js, SITE_LOGOS.project2) and title -->
+          <div class="page-head">
+            <span class="card-icon page-logo" data-brand-slot="project2"></span>
+            <div>
+              <p class="eyebrow">// Project 02</p>
+              <h3 class="page-title">Income Tax Calculator</h3>
+            </div>
+          </div>
+          <p class="page-intro">
+            Enter the taxable income and compute the income tax using a graduated tax table.
+            By default it uses the <strong>table given in the assignment</strong> (TRAIN Law
+            rates for 2018–2022). You can switch to the <strong>current table</strong>
+            (2023 onward), which is the one in effect in 2026. Both tables are stored in
+            <code>TAX_TABLES</code> inside <code>script.js</code> and can be edited.
+          </p>
+
+          <!-- Left: inputs. Right: summary of results. -->
+          <div class="tax-layout">
+
+            <div class="tax-panel panel">
+              <h4>Your income</h4>
+              <p class="hint">
+                Enter the net taxable income. If you enter gross income instead, put
+                SSS, PhilHealth, and Pag-IBIG contributions in the deductions box.
+              </p>
+
+              <!-- Which tax table to use -->
+              <label for="taxTableSelect">Tax table</label>
+              <select id="taxTableSelect">
+                <option value="assignment">Assignment table (TRAIN Law, 2018–2022)</option>
+                <option value="current">Current table (TRAIN Law, 2023 onward)</option>
+              </select>
+
+              <!-- Monthly / Annual switch. The chosen value is kept in the hidden input. -->
+              <div class="toggle-group" role="group" aria-label="Income period">
+                <button type="button" class="toggle-button" data-period="monthly">Monthly</button>
+                <button type="button" class="toggle-button active" data-period="annual">Annual</button>
+              </div>
+              <input type="hidden" id="taxPeriod" value="annual">
+
+              <label for="taxIncome">Taxable income (₱, <span id="taxPeriodLabel">per year</span>)</label>
+              <input type="number" id="taxIncome" min="0" step="any" placeholder="e.g. 520000">
+
+              <label for="taxDeductions">Less: non-taxable deductions (₱, optional)</label>
+              <input type="number" id="taxDeductions" min="0" step="any" value="0">
+              <p class="hint">Leave this at 0 if the amount above is already your taxable income.</p>
+
+              <button type="button" id="taxButton">Compute Tax</button>
+            </div>
+
+            <div class="tax-panel tax-summary">
+              <p class="summary-label">Estimated annual income tax</p>
+              <p class="summary-amount" id="sumAnnualTax">₱0.00</p>
+              <table class="summary-table">
+                <tr><td>Annual taxable income</td><td class="amount" id="sumTaxable">—</td></tr>
+                <tr><td>Monthly income tax</td><td class="amount" id="sumMonthlyTax">—</td></tr>
+                <tr><td>Effective tax rate</td><td class="amount" id="sumRate">—</td></tr>
+                <tr><td>Tax bracket</td><td class="amount" id="sumBracket">—</td></tr>
+                <tr class="total-row"><td>Annual income after tax</td><td class="amount" id="sumAnnualAfter">—</td></tr>
+                <tr class="total-row"><td>Monthly income after tax</td><td class="amount" id="sumMonthlyAfter">—</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <!-- Step-by-step computation (or an error message) -->
+          <div class="result" id="taxResult"></div>
+
+          <h4 class="section-title">Tax table</h4>
+          <p class="hint" id="taxTableNote">Graduated income tax rates for individuals. Your bracket is highlighted after you compute.</p>
+          <div class="table-wrap">
+            <table id="taxTableDisplay"></table>
+          </div>
+          <p class="hint">
+            Formula: Tax = Base tax + (Taxable income − Lower limit of bracket) × Rate.
+            Monthly income is multiplied by 12 to get annual income.
+          </p>
+          <p class="hint">
+            This is an estimate for learning purposes only, not tax advice. It uses the
+            graduated rates and does not cover the optional 8% rate for self-employed
+            individuals or other special cases.
+          </p>
+
+          <!-- Links to the previous and next project -->
+          <nav class="project-nav">
+            <a class="project-nav-link" href="#assignment1">
+              <span class="hint">← Previous project</span>
+              <strong>Conversion Calculator</strong>
+            </a>
+            <a class="project-nav-link project-nav-next" href="#assignment3">
+              <span class="hint">Next project →</span>
+              <strong>Mathematical Operations Using Loops</strong>
+            </a>
+          </nav>
+        </article>
+
+        <!-- ===== Project #3: Loops ===== -->
+        <article class="box page" data-page="assignment3" data-page-theme="medical" hidden>
+          <!-- Page header: project logo (set in branding.js, SITE_LOGOS.project3) and title -->
+          <div class="page-head">
+            <span class="card-icon page-logo" data-brand-slot="project3"></span>
+            <div>
+              <p class="eyebrow">// Project 03</p>
+              <h3 class="page-title">Mathematical Operations Using Loops</h3>
+            </div>
+          </div>
+          <p class="page-intro">Enter N once. The factorial, sum, and average are each computed with a different loop.</p>
+
+          <!-- Input -->
+          <div class="sub-box panel">
+            <h4>Choose N</h4>
+            <p class="hint">A whole number from 0 to 1,000. The first N natural numbers are 1, 2, 3, …, N.</p>
+            <label for="loopN">N</label>
+            <div class="inline-input">
+              <input type="number" id="loopN" min="0" max="1000" step="1" placeholder="e.g. 5">
+              <button type="button" id="loopButton">Compute</button>
+            </div>
+            <div class="result" id="loopError"></div>
+          </div>
+
+          <!-- Results: one card per operation -->
+          <div class="loop-grid">
+
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <h4>Factorial</h4>
+                <span class="card-tag">While Loop</span>
+              </div>
+              <div class="loop-card-result">
+                <p class="loop-value" id="factorialValue">—</p>
+                <p class="loop-steps" id="factorialSteps">N! = 1 × 2 × … × N</p>
+              </div>
+<pre><code>let result = 1, i = 1;
+while (i &lt;= n) {
+  result *= i;
+  i++;
+}</code></pre>
+            </div>
+
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <h4>Sum</h4>
+                <span class="card-tag">Do While Loop</span>
+              </div>
+              <div class="loop-card-result">
+                <p class="loop-value" id="sumValue">—</p>
+                <p class="loop-steps" id="sumSteps">1 + 2 + … + N</p>
+              </div>
+<pre><code>let sum = 0, i = 1;
+do {
+  sum += i;
+  i++;
+} while (i &lt;= n);</code></pre>
+            </div>
+
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <h4>Average</h4>
+                <span class="card-tag">For Loop</span>
+              </div>
+              <div class="loop-card-result">
+                <p class="loop-value" id="averageValue">—</p>
+                <p class="loop-steps" id="averageSteps">sum ÷ N</p>
+              </div>
+<pre><code>let total = 0;
+for (let i = 1; i &lt;= n; i++) {
+  total += i;
+}
+let average = total / n;</code></pre>
+            </div>
+          </div>
+
+          <p class="hint">
+            Factorial uses big-integer math (BigInt), so even large results are exact.
+            0! = 1 by definition; the sum and average of zero numbers are shown as 0.
+          </p>
+
+          <!-- Links to the previous and next project -->
+          <nav class="project-nav">
+            <a class="project-nav-link" href="#assignment2">
+              <span class="hint">← Previous project</span>
+              <strong>Income Tax Calculator</strong>
+            </a>
+            <a class="project-nav-link project-nav-next" href="#assignment4">
+              <span class="hint">Next project →</span>
+              <strong>Simple Payroll System</strong>
+            </a>
+          </nav>
+        </article>
+
+        <!-- ===== Project #4: Payroll ===== -->
+        <article class="box page" data-page="assignment4" data-page-theme="corp" hidden>
+          <!-- Page header: project logo (set in branding.js, SITE_LOGOS.project4) and title -->
+          <div class="page-head">
+            <span class="card-icon page-logo" data-brand-slot="project4"></span>
+            <div>
+              <p class="eyebrow">// Project 04</p>
+              <h3 class="page-title">Simple Payroll System</h3>
+            </div>
+          </div>
+          <p class="page-intro">
+            Add employees to a payroll list and delete them by line number. Below the list
+            is a detailed monthly payslip calculator.
+          </p>
+
+          <!-- ===== Payroll list: add and delete employees ===== -->
+          <h4 class="section-title section-title-first">Payroll List</h4>
+          <div class="panel" id="payListForm">
+            <h4 class="panel-title">Add an employee</h4>
+            <div class="field-grid">
+              <div>
+                <label for="plName">Employee name</label>
+                <input type="text" id="plName" placeholder="e.g. Juan Dela Cruz">
+              </div>
+              <div>
+                <label for="plDays">Days worked</label>
+                <input type="number" id="plDays" min="0" max="366" step="any" placeholder="e.g. 22">
+              </div>
+              <div>
+                <label for="plRate">Daily rate (₱)</label>
+                <input type="number" id="plRate" min="0" step="any" placeholder="e.g. 650">
+              </div>
+              <div>
+                <label for="plDeduction">Deduction amount (₱)</label>
+                <input type="number" id="plDeduction" min="0" step="any" value="0">
+              </div>
+            </div>
+            <button type="button" id="plAddButton">Add Employee</button>
+            <div class="result" id="plAddMessage"></div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="payroll-list-table" id="payrollListTable">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Employee Name</th>
+                  <th class="num">Days Worked</th>
+                  <th class="num">Daily Rate</th>
+                  <th class="num">Gross Pay</th>
+                  <th class="num">Deduction Amount</th>
+                  <th class="num">Net Pay</th>
+                </tr>
+              </thead>
+              <tbody id="payrollListBody"></tbody>
+            </table>
+          </div>
+          <p class="hint">Gross Pay = Days Worked × Daily Rate &nbsp;·&nbsp; Net Pay = Gross Pay − Deduction Amount</p>
+
+          <div class="panel" id="payListDelete">
+            <h4 class="panel-title">Delete an employee</h4>
+            <label for="plDeleteLine">Line number to delete</label>
+            <div class="inline-input">
+              <input type="number" id="plDeleteLine" min="1" step="1" placeholder="e.g. 2">
+              <button type="button" id="plDeleteButton">Delete</button>
+            </div>
+            <div class="result" id="plDeleteMessage"></div>
+          </div>
+
+          <!-- ===== Detailed monthly payslip ===== -->
+          <h4 class="section-title">Detailed Monthly Payslip</h4>
+          <p class="hint">
+            Enter the employee's details for one month. Rates (overtime, contributions)
+            are stored in <code>PAYROLL_CONFIG</code> inside <code>script.js</code> and can be edited.
+          </p>
+
+          <!-- Left: payslip (updates as you type). Right: the input form. -->
+          <div class="payroll-layout">
+
+            <!-- Payslip -->
+            <div class="payslip" aria-live="polite">
+              <div class="payslip-header">
+                <div>
+                  <p class="payslip-label">Payslip</p>
+                  <p class="payslip-name" id="payslipName">Employee name</p>
+                  <p class="payslip-meta" id="payslipMeta">ID · Position</p>
+                </div>
+                <p class="payslip-rate" id="payslipRate">₱0.00 / hour</p>
+              </div>
+              <div class="payslip-body" id="payslipBody">
+                <p class="payslip-empty">Enter the basic monthly salary to see the payslip.</p>
+              </div>
+            </div>
+
+            <!-- Form -->
+            <div class="panel payroll-form">
+              <h4 class="panel-title">Employee &amp; hours</h4>
+              <p class="hint">Fill in the details for one month.</p>
+
+              <label for="empName">Employee name</label>
+              <input type="text" id="empName" placeholder="e.g. Juan Dela Cruz">
+
+              <div class="field-grid">
+                <div>
+                  <label for="empId">Employee ID</label>
+                  <input type="text" id="empId" placeholder="e.g. EMP-001">
+                </div>
+                <div>
+                  <label for="empPosition">Position</label>
+                  <input type="text" id="empPosition" placeholder="e.g. Clerk">
+                </div>
+                <div>
+                  <label for="basicSalary">Basic monthly salary (₱)</label>
+                  <input type="number" id="basicSalary" min="0" step="any" placeholder="e.g. 25000">
+                </div>
+                <div>
+                  <label for="overtimeHours">Overtime hours</label>
+                  <input type="number" id="overtimeHours" min="0" step="any" value="0">
+                  <p class="field-hint" id="overtimeHint">Paid at 1.25× the hourly rate</p>
+                </div>
+                <div>
+                  <label for="allowance">Allowance (₱)</label>
+                  <input type="number" id="allowance" min="0" step="any" value="0">
+                </div>
+                <div>
+                  <label for="otherDeductions">Other deductions (₱)</label>
+                  <input type="number" id="otherDeductions" min="0" step="any" value="0">
+                  <p class="field-hint">e.g. loans, cash advances</p>
+                </div>
+              </div>
+
+              <button type="button" id="payrollButton">Compute Payroll</button>
+              <div class="result" id="payrollResult"></div>
+            </div>
+          </div>
+
+          <details>
+            <summary>Formulas used</summary>
+            <ul id="payrollFormulaList"></ul>
+          </details>
+
+          <!-- Links to the previous and next project -->
+          <nav class="project-nav">
+            <a class="project-nav-link" href="#assignment3">
+              <span class="hint">← Previous project</span>
+              <strong>Mathematical Operations Using Loops</strong>
+            </a>
+            <a class="project-nav-link project-nav-next" href="#home">
+              <span class="hint">Back →</span>
+              <strong>Home</strong>
+            </a>
+          </nav>
+        </article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="uni-logo uni-logo-small" data-brand-slot="university" title="University logo"><!-- logo set in branding.js (SITE_LOGOS.university) --></span>
+        <p>CS 1130 – Introduction to Computing · Student Projects</p>
+        <a class="footer-link" href="#branding">Branding settings</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- External JavaScript: adds behavior and calculations -->
+  <script src="script.js"></script>
+  <!-- Logo customization (kept separate from the calculators) -->
+  <script src="branding.js"></script>
+</body>
+</html>

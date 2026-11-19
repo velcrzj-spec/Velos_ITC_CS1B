@@ -1,0 +1,2672 @@
+/* 
+   style.css – Cyberpunk theme */
+:root {
+  /* Colors */
+  --color-bg: #080812;               /* page background */
+  --color-surface: rgba(18, 18, 38, 0.72);   /* glass panels */
+  --color-surface-solid: #10101f;
+  --color-surface-alt: rgba(255, 255, 255, 0.035);
+  --color-border: rgba(0, 245, 255, 0.16);
+  --color-border-strong: rgba(0, 245, 255, 0.45);
+  --color-text: #e8ecf8;
+  --color-muted: #8892b0;            /* muted blue-gray */
+  --color-cyan: #00f5ff;
+  --color-magenta: #ff00d4;
+  --color-purple: #8b5cf6;
+  --color-error: #ff4d8d;
+  --color-amber: #ffb800;            /* military logo (Project 01) */
+  --color-red: #ff2a3d;              /* red logo (Project 04) */
+
+  /* Glows */
+  --glow-cyan: 0 0 12px rgba(0, 245, 255, 0.45);
+  --glow-magenta: 0 0 12px rgba(255, 0, 212, 0.45);
+  --gradient-neon: linear-gradient(90deg, var(--color-cyan), var(--color-purple) 55%, var(--color-magenta));
+
+  /* Fonts */
+  --font-display: "Orbitron", "Segoe UI", Arial, sans-serif;
+  --font-body: "Exo 2", "Segoe UI", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+
+  /* Sizes */
+  --space: 16px;
+  --radius: 6px;
+  --radius-lg: 14px;
+  --max-width: 1100px;
+  --header-height: 72px;
+}
+
+/* ---------- Base ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.25;
+  margin-top: 0;
+}
+
+h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+h4 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+a {
+  color: var(--color-cyan);
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  color: var(--color-cyan);
+}
+
+::selection {
+  background: rgba(255, 0, 212, 0.35);
+}
+
+/* ---------- Background layers ---------- */
+.bg-grid,
+.bg-glow,
+.bg-scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Faint grid that fades out toward the bottom */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(0, 245, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 85%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 85%);
+}
+
+/* Soft colored light in the corners */
+.bg-glow {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(139, 92, 246, 0.22), transparent 40%),
+    radial-gradient(circle at 92% 18%, rgba(255, 0, 212, 0.14), transparent 38%),
+    radial-gradient(circle at 50% 100%, rgba(0, 245, 255, 0.08), transparent 45%);
+}
+
+/* Very light scanlines */
+.bg-scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.018) 0,
+    rgba(255, 255, 255, 0.018) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* ---------- Header and navigation ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(8, 8, 18, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Thin neon line under the header */
+.site-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--gradient-neon);
+  opacity: 0.6;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  min-height: var(--header-height);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+/* Main logo (set in branding.js, SITE_LOGOS.main). Its height is the logo size. */
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: var(--brand-size, 44px);
+}
+
+.logo-mark svg,
+.logo-mark img {
+  display: block;
+  height: var(--brand-size, 44px);
+  width: auto;
+  max-width: calc(var(--brand-size, 44px) * 5);
+  object-fit: contain;
+}
+
+.logo-mark svg {
+  filter: drop-shadow(0 0 6px rgba(0, 245, 255, 0.35));
+}
+
+/* "WAKE UP, / — CHOOM —" in the same style as the SUBNET ZERO wordmark */
+.logo-text {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Colors follow the main logo. branding.js sets these variables from the
+   logo's main color; without them, the SUBNET ZERO wordmark colors are used. */
+.logo-line {
+  color: var(--logo-text-main, var(--color-text));
+}
+
+.logo-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--logo-text-accent, var(--color-cyan));
+  text-shadow: 0 0 12px var(--logo-text-glow, rgba(0, 245, 255, 0.45));
+}
+
+/* Magenta bars on both sides of CHOOM */
+.logo-accent::before,
+.logo-accent::after {
+  content: "";
+  width: 12px;
+  height: 2px;
+  background: var(--logo-text-bar, var(--color-magenta));
+  box-shadow: none;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Home, Projects, and About links */
+.nav-link {
+  position: relative;
+  padding: 8px 14px;
+  margin: 0;
+  width: auto;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-muted);
+  background: none;
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+/* Underline that grows on hover */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 2px;
+  height: 1px;
+  background: var(--color-cyan);
+  box-shadow: var(--glow-cyan);
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+}
+
+.nav-link:hover,
+.nav-link.active,
+.nav-link[aria-expanded="true"] {
+  color: var(--color-text);
+  background: none;
+  box-shadow: none;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.caret {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.nav-link[aria-expanded="true"] .caret {
+  transform: rotate(180deg);
+}
+
+/* Dropdown menu under the Projects button */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 12px;
+  min-width: 310px;
+  padding: 6px;
+  background: #0e0e1e;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5), var(--glow-cyan);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+}
+
+.dropdown-menu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition: background-color 0.15s ease;
+}
+
+.dropdown-menu a:hover {
+  background: rgba(0, 245, 255, 0.08);
+}
+
+.menu-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-cyan);
+}
+
+/* ---------- Pages ---------- */
+/* Pages hidden by script.js */
+.page[hidden] {
+  display: none;
+}
+
+/* Fade-in when a page is shown */
+.page {
+  animation: pageIn 0.35s ease;
+}
+
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page-content .box {
+  margin-top: 40px;
+}
+
+/* Small label above headings, e.g. "// Project 01" */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+}
+
+.page-title {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.page-intro {
+  color: var(--color-muted);
+  max-width: 760px;
+  margin: 0 0 24px;
+}
+
+.section-title {
+  margin-top: 28px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- Buttons ---------- */
+button,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 22px;
+  margin: 4px 6px 4px 0;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #05050c;
+  background: var(--color-cyan);
+  border: 1px solid var(--color-cyan);
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 rgba(0, 245, 255, 0);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+button:hover,
+.btn:hover {
+  box-shadow: 0 0 18px rgba(0, 245, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+button:active,
+.btn:active {
+  transform: translateY(0);
+}
+
+button:focus-visible,
+.btn:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-magenta);
+  outline-offset: 3px;
+}
+
+.btn-primary {
+  background: var(--gradient-neon);
+  border-color: transparent;
+  color: #05050c;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 22px rgba(139, 92, 246, 0.65);
+}
+
+/* Outline button */
+.btn-ghost {
+  color: var(--color-text);
+  background: transparent;
+  border-color: var(--color-border-strong);
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-magenta);
+  box-shadow: var(--glow-magenta);
+}
+
+/* Small outline button used in the cards */
+.btn-small {
+  padding: 8px 16px;
+  font-size: 0.7rem;
+  color: var(--color-cyan);
+  background: transparent;
+  border-color: var(--color-border-strong);
+  margin: 0;
+}
+
+.btn-small:hover {
+  color: #05050c;
+  background: var(--color-cyan);
+}
+
+/* ---------- Home: hero ---------- */
+.hero {
+  padding: 90px 0 70px;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-cyan);
+  box-shadow: var(--glow-cyan);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% { opacity: 0.35; }
+}
+
+.hero-title {
+  margin: 0 0 18px;
+  font-family: var(--font-display);
+  font-size: 3.3rem;
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: 0.04em;
+  background: var(--gradient-neon);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 18px rgba(0, 245, 255, 0.25));
+}
+
+.hero-subtitle {
+  max-width: 540px;
+  margin: 0 0 30px;
+  font-size: 1.1rem;
+  color: var(--color-muted);
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-buttons .btn {
+  margin: 0;
+}
+
+/* Decorative terminal window */
+.terminal {
+  background: var(--color-surface);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 30px rgba(139, 92, 246, 0.18);
+  overflow: hidden;
+}
+
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.terminal-bar span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-magenta);
+  opacity: 0.8;
+}
+
+.terminal-bar span:nth-child(2) { background: var(--color-purple); }
+.terminal-bar span:nth-child(3) { background: var(--color-cyan); }
+
+.terminal-bar p {
+  margin: 0 0 0 10px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+.terminal-body {
+  margin: 0;
+  padding: 20px 22px;
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: var(--color-text);
+  background: none;
+  border: none;
+}
+
+.t-prompt { color: var(--color-magenta); }
+.t-ok { color: var(--color-cyan); }
+.t-dim { color: var(--color-muted); }
+
+.t-cursor {
+  color: var(--color-cyan);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ---------- Home: project cards ---------- */
+.cards-section {
+  padding: 30px 0 90px;
+  scroll-margin-top: var(--header-height);
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-heading .eyebrow {
+  justify-content: center;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+/* Two columns; cards go down the left column first (1, 2), then the right (3, 4) */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  grid-auto-flow: column;
+  gap: 24px;
+}
+
+.assignment-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 26px;
+  background: var(--color-surface);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Neon line along the top edge of each card */
+.assignment-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-neon);
+  opacity: 0.5;
+  transition: opacity 0.25s ease;
+}
+
+.assignment-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-border-strong);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(0, 245, 255, 0.15);
+}
+
+.assignment-card:hover::before {
+  opacity: 1;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--brand-size, 50px);
+  height: var(--brand-size, 50px);
+  color: var(--color-cyan);
+  background: rgba(0, 245, 255, 0.06);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 12px;
+  box-shadow: inset 0 0 14px rgba(0, 245, 255, 0.12);
+  transition: box-shadow 0.25s ease;
+}
+
+.assignment-card:hover .card-icon {
+  box-shadow: inset 0 0 14px rgba(0, 245, 255, 0.2), var(--glow-cyan);
+}
+
+.card-icon svg {
+  width: 72%;
+  height: 72%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.card-badge {
+  padding: 3px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--color-magenta);
+  border: 1px solid rgba(255, 0, 212, 0.4);
+  border-radius: 999px;
+}
+
+.assignment-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+}
+
+.card-sentence {
+  margin: 0 0 18px;
+  color: var(--color-muted);
+}
+
+/* List of what each project contains */
+.card-items {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  margin: 0 0 22px;
+  padding: 0;
+}
+
+.card-items-two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.card-items li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  background: var(--color-surface-alt);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+}
+
+.card-items li::before {
+  content: "";
+  flex-shrink: 0;
+  width: 5px;
+  height: 5px;
+  margin-right: 2px;
+  border-radius: 50%;
+  background: var(--color-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.card-items li span:first-child {
+  flex: 1;
+}
+
+/* Small label, e.g. which loop is used */
+.card-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-purple);
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.45);
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+
+/* Divider, then the button at the bottom-right of the card */
+.card-footer {
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  text-align: right;
+}
+
+/* ---------- Project card themes ----------
+   Set with data-card-theme on a card in index.html:
+   "street" (Project 01), "military" (Project 02), "medical" (Project 03),
+   "corp" (Project 04). */
+
+/* --- Street kid: graffiti marker font, hot pink and yellow, tape and spray --- */
+.assignment-card[data-card-theme="street"] {
+  --street-pink: #ff2fa8;
+  --street-yellow: #ffe500;
+  background:
+    radial-gradient(circle at 88% 82%, rgba(255, 47, 168, 0.16), transparent 40%),
+    radial-gradient(circle at 8% 100%, rgba(255, 229, 0, 0.08), transparent 35%),
+    var(--color-surface);
+  border-color: rgba(255, 47, 168, 0.35);
+}
+
+.assignment-card[data-card-theme="street"]::before {
+  /* strip of tape across the bottom-left corner */
+  left: -30px;
+  right: auto;
+  top: auto;
+  bottom: 22px;
+  width: 120px;
+  height: 22px;
+  background: rgba(255, 229, 0, 0.75);
+  opacity: 0.85;
+  transform: rotate(38deg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.assignment-card[data-card-theme="street"] h3 {
+  font-family: "Permanent Marker", "Comic Sans MS", cursive;
+  font-size: 1.7rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--street-yellow);
+  text-shadow: 3px 3px 0 var(--street-pink);
+  transform: rotate(-1.5deg);
+  transform-origin: left center;
+}
+
+.assignment-card[data-card-theme="street"] .card-sentence {
+  color: #f3d8ea;
+}
+
+.assignment-card[data-card-theme="street"] .card-badge {
+  font-family: "Permanent Marker", cursive;
+  letter-spacing: 0.04em;
+  color: #0a0a12;
+  background: var(--street-pink);
+  border-color: var(--street-pink);
+  transform: rotate(3deg);
+}
+
+.assignment-card[data-card-theme="street"] .card-items li {
+  font-family: "Permanent Marker", cursive;
+  letter-spacing: 0.02em;
+  color: #fff4c2;
+  background: rgba(255, 47, 168, 0.08);
+  border: 1px dashed rgba(255, 229, 0, 0.45);
+}
+
+.assignment-card[data-card-theme="street"] .card-items li::before {
+  content: "✕";
+  width: auto;
+  height: auto;
+  font-size: 0.75rem;
+  color: var(--street-pink);
+  background: none;
+  box-shadow: none;
+}
+
+.assignment-card[data-card-theme="street"] .card-footer {
+  border-top: 2px dashed rgba(255, 47, 168, 0.4);
+}
+
+.assignment-card[data-card-theme="street"] .btn-small {
+  font-family: "Permanent Marker", cursive;
+  letter-spacing: 0.06em;
+  color: var(--street-yellow);
+  border: 2px solid var(--street-yellow);
+}
+
+.assignment-card[data-card-theme="street"] .btn-small:hover {
+  color: #0a0a12;
+  background: var(--street-yellow);
+  box-shadow: 0 0 18px rgba(255, 229, 0, 0.55);
+}
+
+.assignment-card[data-card-theme="street"]:hover {
+  border-color: var(--street-pink);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(255, 47, 168, 0.25);
+}
+
+/* --- Cyberpunk military: stencil font, olive and amber, hazard stripes --- */
+.assignment-card[data-card-theme="military"] {
+  --mil-olive: #a8bf5a;
+  --mil-amber: #ffb800;
+  background:
+    linear-gradient(rgba(168, 191, 90, 0.05) 1px, transparent 1px) 0 0 / 100% 22px,
+    linear-gradient(160deg, rgba(110, 125, 60, 0.18), transparent 55%),
+    var(--color-surface);
+  border-color: rgba(168, 191, 90, 0.35);
+  border-radius: 4px;
+}
+
+.assignment-card[data-card-theme="military"]::before {
+  /* hazard stripes along the top edge */
+  height: 6px;
+  background: repeating-linear-gradient(-45deg, var(--mil-amber) 0 10px, #11120a 10px 20px);
+  opacity: 0.9;
+}
+
+.assignment-card[data-card-theme="military"] h3 {
+  font-family: "Black Ops One", "Saira Stencil One", Impact, sans-serif;
+  font-size: 1.55rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--mil-olive);
+}
+
+.assignment-card[data-card-theme="military"] .card-sentence {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: #c9d3a7;
+}
+
+.assignment-card[data-card-theme="military"] .card-badge {
+  font-family: "Black Ops One", Impact, sans-serif;
+  letter-spacing: 0.12em;
+  color: #11120a;
+  background: var(--mil-amber);
+  border-color: var(--mil-amber);
+  border-radius: 2px;
+}
+
+.assignment-card[data-card-theme="military"] .card-items li {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #dfe6c4;
+  background: rgba(168, 191, 90, 0.07);
+  border: 1px solid rgba(168, 191, 90, 0.25);
+  border-left: 3px solid var(--mil-amber);
+  border-radius: 2px;
+}
+
+.assignment-card[data-card-theme="military"] .card-items li::before {
+  content: "▸";
+  width: auto;
+  height: auto;
+  color: var(--mil-amber);
+  background: none;
+  box-shadow: none;
+}
+
+.assignment-card[data-card-theme="military"] .card-footer {
+  border-top: 1px solid rgba(168, 191, 90, 0.3);
+}
+
+.assignment-card[data-card-theme="military"] .btn-small {
+  font-family: "Black Ops One", Impact, sans-serif;
+  color: var(--mil-amber);
+  border-color: var(--mil-amber);
+  border-radius: 2px;
+}
+
+.assignment-card[data-card-theme="military"] .btn-small:hover {
+  color: #11120a;
+  background: var(--mil-amber);
+  box-shadow: 0 0 18px rgba(255, 184, 0, 0.5);
+}
+
+.assignment-card[data-card-theme="military"]:hover {
+  border-color: var(--mil-olive);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(168, 191, 90, 0.2);
+}
+
+/* --- Trauma-team medical (rapid-response medics):
+       clinical white, teal, emergency red --- */
+.assignment-card[data-card-theme="medical"] {
+  --med-white: #f2f5f7;
+  --med-teal: #00d4c8;
+  --med-red: #ff2a3d;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 30%),
+    #0b0d14;
+  border-color: rgba(0, 212, 200, 0.35);
+  border-radius: 6px;
+}
+
+.assignment-card[data-card-theme="medical"]::before {
+  /* white bar with a red emergency stripe */
+  height: 6px;
+  background: linear-gradient(90deg, #f2f5f7 0 70%, var(--med-red) 70% 82%, #f2f5f7 82%);
+  opacity: 0.95;
+}
+
+.assignment-card[data-card-theme="medical"] h3 {
+  font-family: "Russo One", var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #f2f5f7;
+}
+
+/* Red underline under the title */
+.assignment-card[data-card-theme="medical"] h3::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 8px;
+  background: var(--med-red);
+}
+
+.assignment-card[data-card-theme="medical"] .card-sentence {
+  color: #b9d9d6;
+}
+
+.assignment-card[data-card-theme="medical"] .card-badge {
+  font-family: "Russo One", sans-serif;
+  letter-spacing: 0.1em;
+  color: #0b0d14;
+  background: var(--med-white);
+  border-color: var(--med-white);
+  border-radius: 3px;
+}
+
+/* Loop tags in the medical theme */
+.assignment-card[data-card-theme="medical"] .card-tag {
+  font-family: "Russo One", sans-serif;
+  color: var(--med-teal);
+  background: rgba(0, 212, 200, 0.08);
+  border-color: rgba(0, 212, 200, 0.45);
+  text-transform: none;
+}
+
+.assignment-card[data-card-theme="medical"] .card-items li {
+  font-family: "Russo One", sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #e6f7f5;
+  background: rgba(0, 212, 200, 0.06);
+  border: 1px solid rgba(0, 212, 200, 0.28);
+  border-radius: 3px;
+}
+
+/* Small red plus sign as the bullet */
+.assignment-card[data-card-theme="medical"] .card-items li::before {
+  content: "+";
+  width: auto;
+  height: auto;
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--med-red);
+  background: none;
+  box-shadow: none;
+}
+
+.assignment-card[data-card-theme="medical"] .card-footer {
+  border-top: 1px dashed rgba(0, 212, 200, 0.3);
+}
+
+.assignment-card[data-card-theme="medical"] .btn-small {
+  font-family: "Russo One", sans-serif;
+  color: var(--med-teal);
+  border-color: var(--med-teal);
+  border-radius: 3px;
+}
+
+.assignment-card[data-card-theme="medical"] .btn-small:hover {
+  color: #0b0d14;
+  background: var(--med-teal);
+  box-shadow: 0 0 18px rgba(0, 212, 200, 0.5);
+}
+
+.assignment-card[data-card-theme="medical"]:hover {
+  border-color: var(--med-teal);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(0, 212, 200, 0.2);
+}
+
+/* --- Red corporate-military high-tech: black and red, sharp edges,
+       wide high-tech display font --- */
+.assignment-card[data-card-theme="corp"] {
+  --corp-red: #ff2a3d;
+  --corp-red-soft: rgba(255, 42, 61, 0.12);
+  background:
+    linear-gradient(135deg, rgba(255, 42, 61, 0.14), transparent 45%),
+    repeating-linear-gradient(-45deg, transparent 0 14px, rgba(255, 42, 61, 0.025) 14px 15px),
+    #08070a;
+  border-color: rgba(255, 42, 61, 0.4);
+  border-radius: 0;
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
+}
+
+.assignment-card[data-card-theme="corp"]::before {
+  /* solid red bar with a dark notch */
+  height: 4px;
+  background: linear-gradient(90deg, var(--corp-red) 0 62%, transparent 62% 66%, var(--corp-red) 66% 78%, transparent 78%);
+  opacity: 1;
+}
+
+.assignment-card[data-card-theme="corp"] h3 {
+  font-family: "Michroma", "Russo One", var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  padding-left: 14px;
+  border-left: 4px solid var(--corp-red);
+}
+
+.assignment-card[data-card-theme="corp"] .card-sentence {
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  color: #e4b9bd;
+}
+
+.assignment-card[data-card-theme="corp"] .card-badge {
+  font-family: "Michroma", sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: #ffffff;
+  background: var(--corp-red);
+  border-color: var(--corp-red);
+  border-radius: 0;
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  padding: 4px 14px;
+}
+
+.assignment-card[data-card-theme="corp"] .card-items li {
+  font-family: "Michroma", sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f4e6e7;
+  background: var(--corp-red-soft);
+  border: 1px solid rgba(255, 42, 61, 0.3);
+  border-left: 3px solid var(--corp-red);
+  border-radius: 0;
+}
+
+.assignment-card[data-card-theme="corp"] .card-items li::before {
+  content: "◆";
+  width: auto;
+  height: auto;
+  font-size: 0.6rem;
+  color: var(--corp-red);
+  background: none;
+  box-shadow: none;
+}
+
+.assignment-card[data-card-theme="corp"] .card-footer {
+  border-top: 1px solid rgba(255, 42, 61, 0.35);
+}
+
+.assignment-card[data-card-theme="corp"] .btn-small {
+  font-family: "Michroma", sans-serif;
+  font-size: 0.62rem;
+  color: #ffffff;
+  border-color: var(--corp-red);
+  border-radius: 0;
+}
+
+.assignment-card[data-card-theme="corp"] .btn-small:hover {
+  background: var(--corp-red);
+  box-shadow: 0 0 18px rgba(255, 42, 61, 0.55);
+}
+
+.assignment-card[data-card-theme="corp"]:hover {
+  border-color: var(--corp-red);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 26px rgba(255, 42, 61, 0.25);
+}
+
+/* ---------- Content boxes (project pages) ---------- */
+.box {
+  position: relative;
+  padding: 36px;
+  margin-bottom: 60px;
+  background: var(--color-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* Small neon corner marks */
+.box::before,
+.box::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: var(--color-cyan);
+  border-style: solid;
+  opacity: 0.8;
+}
+
+.box::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+  border-top-left-radius: var(--radius-lg);
+}
+
+.box::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+  border-color: var(--color-magenta);
+  border-bottom-right-radius: var(--radius-lg);
+}
+
+/* Inner panel for forms */
+.panel {
+  padding: 22px;
+  margin-bottom: 18px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+}
+
+.panel h4 + .form-row,
+.panel .form-row + h4 {
+  margin-top: 6px;
+}
+
+.sub-box {
+  padding-top: 22px;
+}
+
+.inline-input {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  max-width: 460px;
+}
+
+.inline-input input {
+  margin: 4px 0;
+}
+
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  padding: 14px 16px;
+  overflow-x: auto;
+  color: #c9d1ff;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+}
+
+pre code {
+  color: inherit;
+  font-size: inherit;
+}
+
+.hint {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+details {
+  margin-top: 18px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius);
+}
+
+summary {
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+}
+
+details ul {
+  margin: 12px 0 0;
+  padding-left: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--color-text);
+}
+
+details li {
+  margin: 4px 0;
+}
+
+/* ---------- Project page header (logo + title) ---------- */
+.page-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 8px;
+}
+
+.page-head .page-title {
+  margin-bottom: 0;
+}
+
+/* The project logo on its page: a little bigger than on the card */
+.page-logo {
+  flex-shrink: 0;
+  width: calc(var(--brand-size, 50px) * 1.25);
+  height: calc(var(--brand-size, 50px) * 1.25);
+}
+
+.page-head + .page-intro {
+  margin-top: 14px;
+}
+
+/* ---------- Project page themes ----------
+   Each project page uses the same theme as its card on the Home page.
+   Set with data-page-theme on the page in index.html. The theme changes
+   the site's color and font variables, so every part of the page follows. */
+
+/* --- Street kid (Project 01) --- */
+[data-page-theme="street"] {
+  --color-cyan: #ffe500;
+  --color-magenta: #ff2fa8;
+  --color-purple: #ff2fa8;
+  --color-border: rgba(255, 47, 168, 0.28);
+  --color-border-strong: rgba(255, 229, 0, 0.55);
+  --glow-cyan: 0 0 12px rgba(255, 229, 0, 0.45);
+  --glow-magenta: 0 0 12px rgba(255, 47, 168, 0.5);
+  --gradient-neon: linear-gradient(90deg, #ffe500, #ff2fa8);
+  --font-display: "Permanent Marker", "Comic Sans MS", cursive;
+}
+
+.box[data-page-theme="street"] {
+  background:
+    radial-gradient(circle at 92% 6%, rgba(255, 47, 168, 0.16), transparent 35%),
+    radial-gradient(circle at 4% 96%, rgba(255, 229, 0, 0.08), transparent 30%),
+    var(--color-surface);
+}
+
+/* Strip of tape across the top-left corner */
+.box[data-page-theme="street"]::before {
+  width: 130px;
+  height: 24px;
+  top: 10px;
+  left: -28px;
+  border: none;
+  border-radius: 0;
+  background: rgba(255, 229, 0, 0.75);
+  transform: rotate(-35deg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+[data-page-theme="street"] .page-title {
+  font-size: 2.3rem;
+  font-weight: 400;
+  color: var(--color-cyan);
+  text-shadow: 3px 3px 0 var(--color-magenta);
+  transform: rotate(-1deg);
+  transform-origin: left center;
+}
+
+[data-page-theme="street"] .eyebrow {
+  font-family: "Permanent Marker", cursive;
+  color: var(--color-magenta);
+}
+
+/* --- Cyberpunk military (Project 02) --- */
+[data-page-theme="military"] {
+  --color-cyan: #ffb800;
+  --color-magenta: #a8bf5a;
+  --color-purple: #a8bf5a;
+  --color-border: rgba(168, 191, 90, 0.3);
+  --color-border-strong: rgba(255, 184, 0, 0.5);
+  --glow-cyan: 0 0 12px rgba(255, 184, 0, 0.4);
+  --glow-magenta: 0 0 12px rgba(168, 191, 90, 0.4);
+  --gradient-neon: linear-gradient(90deg, #ffb800, #a8bf5a);
+  --font-display: "Black Ops One", "Saira Stencil One", Impact, sans-serif;
+  --radius-lg: 4px;
+}
+
+.box[data-page-theme="military"] {
+  background:
+    linear-gradient(rgba(168, 191, 90, 0.045) 1px, transparent 1px) 0 0 / 100% 24px,
+    linear-gradient(160deg, rgba(110, 125, 60, 0.16), transparent 50%),
+    var(--color-surface);
+}
+
+/* Hazard stripes along the top edge */
+.box[data-page-theme="military"]::before {
+  width: auto;
+  right: -1px;
+  height: 8px;
+  border: none;
+  border-radius: 0;
+  background: repeating-linear-gradient(-45deg, #ffb800 0 12px, #11120a 12px 24px);
+  opacity: 0.9;
+}
+
+[data-page-theme="military"] .page-title {
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #a8bf5a;
+}
+
+/* --- Trauma-team medical (Project 03) --- */
+[data-page-theme="medical"] {
+  --color-cyan: #00d4c8;
+  --color-magenta: #ff2a3d;
+  --color-purple: #00d4c8;
+  --color-border: rgba(0, 212, 200, 0.28);
+  --color-border-strong: rgba(0, 212, 200, 0.55);
+  --glow-cyan: 0 0 12px rgba(0, 212, 200, 0.4);
+  --glow-magenta: 0 0 12px rgba(255, 42, 61, 0.45);
+  --gradient-neon: linear-gradient(90deg, #f2f5f7, #00d4c8);
+  --font-display: "Russo One", "Arial Black", sans-serif;
+}
+
+.box[data-page-theme="medical"] {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 25%),
+    #0b0d14;
+}
+
+/* White bar with a red emergency stripe along the top */
+.box[data-page-theme="medical"]::before {
+  width: auto;
+  right: -1px;
+  height: 7px;
+  border: none;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: linear-gradient(90deg, #f2f5f7 0 72%, #ff2a3d 72% 84%, #f2f5f7 84%);
+  opacity: 0.95;
+}
+
+[data-page-theme="medical"] .page-title {
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #f2f5f7;
+}
+
+[data-page-theme="medical"] .page-title::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin-top: 8px;
+  background: #ff2a3d;
+}
+
+/* --- Red corporate-military high-tech (Project 04) --- */
+[data-page-theme="corp"] {
+  --color-cyan: #ff2a3d;
+  --color-magenta: #ff2a3d;
+  --color-purple: #ff6b78;
+  --color-border: rgba(255, 42, 61, 0.3);
+  --color-border-strong: rgba(255, 42, 61, 0.55);
+  --glow-cyan: 0 0 12px rgba(255, 42, 61, 0.45);
+  --glow-magenta: 0 0 12px rgba(255, 42, 61, 0.45);
+  --gradient-neon: linear-gradient(90deg, #ff2a3d, #ff6b78);
+  --font-display: "Michroma", "Russo One", sans-serif;
+  --radius-lg: 0;
+  --radius: 0;
+}
+
+.box[data-page-theme="corp"] {
+  background:
+    linear-gradient(135deg, rgba(255, 42, 61, 0.12), transparent 40%),
+    repeating-linear-gradient(-45deg, transparent 0 16px, rgba(255, 42, 61, 0.022) 16px 17px),
+    #08070a;
+  clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 30px 100%, 0 calc(100% - 30px));
+}
+
+/* Red bar with notches along the top edge */
+.box[data-page-theme="corp"]::before {
+  width: auto;
+  right: 30px;
+  height: 5px;
+  border: none;
+  border-radius: 0;
+  background: linear-gradient(90deg, #ff2a3d 0 60%, transparent 60% 63%, #ff2a3d 63% 76%, transparent 76%);
+  opacity: 1;
+}
+
+[data-page-theme="corp"] .page-title {
+  font-weight: 400;
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  padding-left: 14px;
+  border-left: 4px solid #ff2a3d;
+}
+
+/* White text on red buttons, for contrast */
+[data-page-theme="corp"] button:not(.nav-link):not(.toggle-button),
+[data-page-theme="corp"] .toggle-button.active {
+  color: #ffffff;
+}
+
+/* ---------- Forms ---------- */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+input,
+select {
+  width: 100%;
+  padding: 11px 14px;
+  margin-bottom: 16px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text);
+  background: rgba(5, 5, 14, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input::placeholder {
+  color: rgba(136, 146, 176, 0.6);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-cyan);
+  box-shadow: 0 0 0 3px rgba(0, 245, 255, 0.12), var(--glow-cyan);
+}
+
+/* Custom arrow for dropdown lists */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2300f5ff' stroke-width='1.6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px;
+  cursor: pointer;
+}
+
+select option {
+  background: var(--color-surface-solid);
+  color: var(--color-text);
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 18px;
+}
+
+.form-row > div {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* ---------- Results and errors ---------- */
+.result:empty {
+  display: none;
+}
+
+.result {
+  margin-top: 16px;
+  padding: 16px 18px;
+  background: rgba(0, 245, 255, 0.05);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-cyan);
+  border-radius: var(--radius);
+  animation: pageIn 0.25s ease;
+}
+
+.result.error {
+  color: var(--color-error);
+  background: rgba(255, 77, 141, 0.07);
+  border-color: rgba(255, 77, 141, 0.3);
+  border-left-color: var(--color-error);
+}
+
+.result p {
+  margin: 4px 0;
+}
+
+/* Bigger readout for the conversion answer */
+.result-readout p:last-child {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  color: var(--color-cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+.result-readout p:last-child strong {
+  font-weight: 600;
+}
+
+/* ---------- Tables ---------- */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+th,
+td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+th {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+  background: rgba(0, 245, 255, 0.05);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+th:last-child:not(:first-child) {
+  text-align: right;
+}
+
+td.amount {
+  text-align: right;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+}
+
+tr.total-row td {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* ---------- Project 2: Income tax ---------- */
+.tax-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.tax-panel {
+  padding: 24px;
+  margin-bottom: 0;
+  border-radius: 12px;
+}
+
+.tax-panel h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+/* Monthly / Annual switch */
+.toggle-group {
+  display: inline-flex;
+  margin: 4px 0 18px;
+  padding: 4px;
+  background: rgba(5, 5, 14, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+.toggle-button {
+  margin: 0;
+  width: auto;
+  padding: 7px 20px;
+  font-size: 0.7rem;
+  color: var(--color-muted);
+  background: transparent;
+  border: none;
+  border-radius: 999px;
+}
+
+.toggle-button:hover {
+  color: var(--color-text);
+  box-shadow: none;
+  transform: none;
+}
+
+.toggle-button.active {
+  color: #05050c;
+  background: var(--color-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+/* Results dashboard on the right */
+.tax-summary {
+  position: relative;
+  background:
+    linear-gradient(160deg, rgba(139, 92, 246, 0.16), rgba(0, 245, 255, 0.04) 60%),
+    rgba(10, 10, 24, 0.85);
+  border: 1px solid var(--color-border-strong);
+  box-shadow: inset 0 0 40px rgba(139, 92, 246, 0.08);
+}
+
+.summary-label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.summary-amount {
+  margin: 6px 0 14px;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-cyan);
+  text-shadow: var(--glow-cyan);
+  overflow-wrap: anywhere;
+}
+
+.summary-table td {
+  padding: 10px 0;
+  border-bottom: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  color: var(--color-muted);
+}
+
+.summary-table th:last-child:not(:first-child) {
+  text-align: right;
+}
+
+td.amount {
+  color: var(--color-text);
+}
+
+.summary-table tr.total-row td {
+  color: var(--color-magenta);
+}
+
+/* Highlighted row in the tax table */
+tr.current-bracket td {
+  font-weight: 700;
+  color: var(--color-text);
+  background: rgba(255, 0, 212, 0.1);
+}
+
+tr.current-bracket td:first-child {
+  box-shadow: inset 3px 0 0 var(--color-magenta);
+}
+
+/* ---------- Project 3: Loop result cards ---------- */
+/* The three cards are stacked: Factorial, then Sum, then Average */
+.loop-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  margin: 20px 0;
+}
+
+.loop-card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 10, 24, 0.75);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.loop-card:hover {
+  border-color: var(--color-border-strong);
+  box-shadow: 0 0 22px rgba(0, 245, 255, 0.12);
+}
+
+.loop-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.loop-card-header h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+}
+
+.loop-card-result {
+  flex: 1;
+  padding: 16px 18px;
+}
+
+.loop-value {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  color: var(--color-cyan);
+  text-shadow: var(--glow-cyan);
+  overflow-wrap: anywhere;   /* long factorials wrap instead of overflowing */
+  max-height: 8em;
+  overflow-y: auto;
+}
+
+.loop-steps {
+  margin: 6px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+
+.loop-card pre {
+  margin: 0;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 0;
+}
+
+/* ---------- Project 4: Payroll (payslip on the left, form on the right) ---------- */
+.payroll-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.panel-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+
+.payroll-form {
+  margin-bottom: 0;
+}
+
+.payroll-form .hint {
+  margin: 0 0 16px;
+}
+
+/* Two fields per row inside the form */
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+
+.field-hint {
+  margin: -10px 0 14px;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+
+/* Payslip card */
+.payslip {
+  position: sticky;
+  top: calc(var(--header-height) + 16px);
+  background: rgba(10, 10, 24, 0.85);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.12);
+}
+
+.payslip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 18px 20px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.28), rgba(0, 245, 255, 0.08));
+  border-bottom: 2px solid transparent;
+  border-image: var(--gradient-neon) 1;
+}
+
+.payslip-label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+}
+
+.payslip-name {
+  margin: 2px 0 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.payslip-meta {
+  margin: 2px 0 0;
+  font-size: 0.82rem;
+  color: var(--color-muted);
+}
+
+.payslip-rate {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-cyan);
+  white-space: nowrap;
+}
+
+.payslip-body {
+  padding: 6px 20px 20px;
+}
+
+.payslip-empty {
+  margin: 14px 0 0;
+  color: var(--color-muted);
+}
+
+.payslip-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+.payslip-line .amount {
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+.payslip-line.total {
+  font-weight: 700;
+}
+
+.payslip-line.deduct .amount {
+  color: var(--color-magenta);
+}
+
+/* Small grey note under a line, e.g. "10 hrs × ₱142.05 (1.25×)" */
+.payslip-note {
+  margin: -4px 0 0;
+  padding-bottom: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+.payslip-net {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 18px 20px;
+  font-weight: 700;
+  background: rgba(0, 245, 255, 0.07);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 20px rgba(0, 245, 255, 0.08);
+}
+
+.payslip-net-amount {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+/* ---------- Project 4: Payroll list (add / delete) ---------- */
+.section-title-first {
+  margin-top: 0;
+}
+
+.payroll-list-table th.num,
+.payroll-list-table td.num {
+  text-align: right;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+}
+
+.payroll-list-table th.num {
+  font-family: var(--font-display);
+}
+
+.payroll-list-table td:first-child {
+  font-family: var(--font-mono);
+  color: var(--color-cyan);
+}
+
+.payroll-list-table td.net {
+  font-weight: 700;
+  color: var(--color-cyan);
+}
+
+/* Row that was just added */
+.payroll-list-table tr.row-new td {
+  background: rgba(0, 245, 255, 0.07);
+}
+
+.payroll-list-table .empty-row td {
+  text-align: center;
+  color: var(--color-muted);
+  padding: 18px;
+}
+
+#payListDelete {
+  margin-top: 18px;
+}
+
+/* ---------- About ---------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.info-tile {
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-cyan);
+  border-radius: var(--radius);
+}
+
+.info-tile:nth-child(even) {
+  border-left-color: var(--color-magenta);
+}
+
+.info-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.info-value {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.about-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+/* ---------- Previous / next project links ---------- */
+.project-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.project-nav-link {
+  display: block;
+  padding: 16px 20px;
+  color: var(--color-text);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.project-nav-link:hover {
+  border-color: var(--color-cyan);
+  box-shadow: 0 0 18px rgba(0, 245, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.project-nav-link .hint {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+}
+
+.project-nav-link strong {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  letter-spacing: 0.03em;
+}
+
+.project-nav-next {
+  text-align: right;
+}
+
+/* ---------- Branding: logo slots ----------
+   Elements with data-brand-slot show a logo that can be changed
+   on the Branding page (see branding.js). */
+
+/* Uploaded logos keep their shape (no stretching) */
+[data-brand-slot] img {
+  display: block;
+  object-fit: contain;
+}
+
+/* Main logo: the uploaded image replaces the </> box */
+.logo-mark.brand-custom {
+  width: auto;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.logo-mark.brand-custom img {
+  height: var(--brand-size, 38px);
+  width: auto;
+  max-width: calc(var(--brand-size, 38px) * 4);
+  filter: drop-shadow(0 0 6px rgba(0, 245, 255, 0.35));
+}
+
+/* Project icons: an image logo fits inside the square without stretching */
+.card-icon:has(img),
+.card-icon.brand-custom {
+  padding: 5px;
+}
+
+.card-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* University logo */
+.uni-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: var(--brand-size, 56px);
+  min-width: var(--brand-size, 56px);
+  color: var(--color-cyan);
+}
+
+.uni-logo svg {
+  width: var(--brand-size, 56px);
+  height: var(--brand-size, 56px);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(0, 245, 255, 0.4));
+}
+
+.uni-logo img {
+  height: var(--brand-size, 56px);
+  width: auto;
+  max-width: min(calc(var(--brand-size, 56px) * 4), 100%);
+}
+
+.uni-logo.brand-custom {
+  max-width: 100%;
+  min-width: 0;
+  height: auto;
+}
+
+/* ---- Logo drawing styles (used by the SVG logos in SITE_LOGOS) ---- */
+.lg-text {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  stroke: none;
+}
+
+.lg-white { fill: var(--color-text); }
+.lg-cyan { fill: var(--color-cyan); }
+.lg-fill-magenta { fill: var(--color-magenta); }
+.lg-no-stroke { stroke: none; }
+
+.lg-line-cyan {
+  fill: none;
+  stroke: var(--color-cyan);
+  stroke-width: 2.5;
+}
+
+.lg-line-magenta {
+  fill: none;
+  stroke: var(--color-magenta);
+}
+
+.lg-dashed {
+  stroke-dasharray: 6 4;
+}
+
+.lg-small {
+  font-size: 9px;
+}
+
+.lg-line-white {
+  fill: none;
+  stroke: var(--color-text);
+}
+
+/* Military high-tech logo (Project 01): amber, stencil font */
+.mil-frame { fill: rgba(255, 184, 0, 0.08); stroke: var(--color-amber); stroke-width: 2; }
+.mil-stripes { stroke: var(--color-amber); stroke-width: 2.4; stroke-linecap: butt; opacity: 0.55; }
+.mil-chevron { fill: none; stroke: var(--color-amber); stroke-width: 2.6; stroke-linecap: square; stroke-linejoin: miter; }
+.mil-text {
+  font-family: "Saira Stencil One", "Arial Black", Impact, sans-serif;
+  font-size: 10px;
+  fill: var(--color-amber);
+  stroke: none;
+  letter-spacing: 0.06em;
+}
+
+/* Military + high-tech logo in red (Project 04): angular industrial font */
+.red-frame { fill: rgba(255, 42, 61, 0.1); stroke: var(--color-red); stroke-width: 2; stroke-linejoin: miter; }
+.red-chevron { fill: none; stroke: var(--color-red); stroke-width: 2.4; stroke-linecap: square; stroke-linejoin: miter; }
+.red-circuit { fill: none; stroke: #ff7a85; stroke-width: 1.4; }
+.red-node { fill: #ff7a85; stroke: none; }
+.red-text {
+  font-family: "Russo One", "Arial Black", sans-serif;
+  font-size: 10px;
+  fill: #ffe9eb;
+  stroke: none;
+}
+
+/* Icon tiles that match a logo's tone */
+.card-icon[data-logo-tone="military"] {
+  color: var(--color-amber);
+  background: rgba(255, 184, 0, 0.06);
+  border-color: rgba(255, 184, 0, 0.5);
+  box-shadow: inset 0 0 14px rgba(255, 184, 0, 0.12);
+}
+
+.card-icon[data-logo-tone="red"] {
+  color: var(--color-red);
+  background: rgba(255, 42, 61, 0.07);
+  border-color: rgba(255, 42, 61, 0.55);
+  box-shadow: inset 0 0 14px rgba(255, 42, 61, 0.14);
+}
+
+.assignment-card:hover .card-icon[data-logo-tone="military"] {
+  box-shadow: inset 0 0 14px rgba(255, 184, 0, 0.2), 0 0 12px rgba(255, 184, 0, 0.45);
+}
+
+.assignment-card:hover .card-icon[data-logo-tone="red"] {
+  box-shadow: inset 0 0 14px rgba(255, 42, 61, 0.2), 0 0 12px rgba(255, 42, 61, 0.5);
+}
+
+/* A logo the user removed */
+.brand-hidden {
+  display: none !important;
+}
+
+.about-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+/* Settings (gear) icon in the navigation */
+.nav-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.4s ease;
+}
+
+.nav-icon:hover svg {
+  transform: rotate(60deg);
+}
+
+/* ---------- Branding settings page ---------- */
+.brand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+}
+
+.brand-slot {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.brand-slot-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.brand-slot-head h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+}
+
+.brand-previews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.brand-previews figure {
+  margin: 0;
+}
+
+.brand-previews figcaption {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.brand-new figcaption {
+  color: var(--color-magenta);
+}
+
+/* Checkerboard background shows transparent areas of a logo */
+.brand-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 96px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  background-color: #0b0b18;
+  background-image:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.05) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.05) 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+.brand-new .brand-preview {
+  border-color: rgba(255, 0, 212, 0.5);
+}
+
+.brand-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Default logos shown inside the preview box */
+.brand-default {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-cyan);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.brand-default svg {
+  width: auto;
+  height: 44px;
+  max-width: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Image logos shown inside a preview box */
+.brand-default img {
+  max-width: 100%;
+  max-height: 74px;
+  object-fit: contain;
+}
+
+.brand-preview-text {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+/* File chooser styled as a button */
+.file-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  margin-bottom: 10px;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.file-button:hover,
+.file-button:focus-within {
+  background: rgba(0, 245, 255, 0.06);
+  box-shadow: var(--glow-cyan);
+}
+
+.file-button input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.brand-pending,
+.brand-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.brand-pending[hidden] {
+  display: none;
+}
+
+.brand-pending button,
+.brand-actions button {
+  flex: 1;
+  margin: 0;
+  padding: 9px 12px;
+  font-size: 0.68rem;
+}
+
+.brand-actions {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.brand-size-label {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.brand-size-label span {
+  font-family: var(--font-mono);
+  color: var(--color-cyan);
+}
+
+/* Size slider */
+.brand-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  padding: 0;
+  margin: 8px 0 16px;
+  background: var(--gradient-neon);
+  border: none;
+  border-radius: 999px;
+  box-shadow: none;
+}
+
+.brand-range:focus {
+  box-shadow: none;
+}
+
+.brand-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #05050c;
+  border: 2px solid var(--color-cyan);
+  box-shadow: var(--glow-cyan);
+  cursor: pointer;
+}
+
+.brand-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #05050c;
+  border: 2px solid var(--color-cyan);
+  box-shadow: var(--glow-cyan);
+  cursor: pointer;
+}
+
+.brand-status {
+  min-height: 1.2em;
+  margin: 6px 0 0;
+  font-size: 0.82rem;
+  color: var(--color-cyan);
+}
+
+.brand-status.error {
+  color: var(--color-error);
+}
+
+.brand-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.brand-footer button {
+  margin: 0;
+}
+
+/* Footer layout with the small university logo */
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 18px;
+}
+
+.footer-link {
+  color: var(--color-muted);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(136, 146, 176, 0.5);
+}
+
+.footer-link:hover {
+  color: var(--color-cyan);
+  border-color: var(--color-cyan);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  padding: 26px 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-align: center;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* ---------- Responsive: tablet ---------- */
+@media (max-width: 900px) {
+  .hero { padding: 60px 0 50px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 36px; }
+  .hero-title { font-size: 2.8rem; }
+  .loop-grid { grid-template-columns: 1fr; }
+  .tax-layout { grid-template-columns: 1fr; }
+
+  /* Keep a large custom logo from crowding the menu */
+  .logo-mark svg,
+  .logo-mark img { height: min(var(--brand-size, 44px), 48px); max-width: 120px; }
+  .logo-text { font-size: 0.86rem; }
+
+  /* Payroll: form first, then the payslip */
+  .payroll-layout { grid-template-columns: 1fr; }
+  .payroll-form { order: -1; }
+  .payslip { position: static; }
+}
+
+/* ---------- Responsive: mobile ---------- */
+@media (max-width: 640px) {
+  :root { --header-height: 64px; }
+
+  .logo { gap: 8px; }
+  .logo-text { font-size: 0.7rem; letter-spacing: 0.04em; }
+  .logo-accent { gap: 4px; }
+  .logo-accent::before,
+  .logo-accent::after { width: 7px; }
+  .logo-mark { height: auto; }
+  .logo-mark svg,
+  .logo-mark img { height: min(var(--brand-size, 44px), 30px); max-width: 66px; }
+  .main-nav { gap: 2px; }
+  .nav-link { padding: 8px 7px; font-size: 0.66rem; letter-spacing: 0.06em; }
+  .nav-link::after { left: 7px; right: 7px; }
+  .dropdown-menu { position: fixed; left: 12px; right: 12px; top: var(--header-height); min-width: 0; }
+
+  .hero-title { font-size: 2rem; }
+  .terminal-body { font-size: 0.8rem; }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-flow: row;
+  }
+  .card-items-two { grid-template-columns: 1fr; }
+  .assignment-card { padding: 22px; }
+
+  .box { padding: 24px 18px; }
+  .page-content .box { margin-top: 24px; }
+  .page-title { font-size: 1.4rem; }
+  .panel { padding: 18px; }
+
+  .field-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .brand-grid { grid-template-columns: 1fr; }
+  .about-header { flex-wrap: wrap-reverse; }
+  .page-head { gap: 12px; align-items: flex-start; }
+  .page-logo { width: var(--brand-size, 50px); height: var(--brand-size, 50px); }
+  [data-page-theme="street"] .page-title { font-size: 1.6rem; }
+  [data-page-theme="corp"] .page-title { font-size: 1.15rem; }
+  .project-nav { grid-template-columns: 1fr; }
+
+  button:not(.nav-link):not(.toggle-button) {
+    width: 100%;
+    margin-right: 0;
+  }
+  .inline-input { flex-direction: column; align-items: stretch; }
+}
+
+/* Small phones: tighter logo text so the menu fits */
+@media (max-width: 440px) {
+  .logo { gap: 6px; }
+  .logo-text { font-size: 0.6rem; letter-spacing: 0.02em; }
+  .logo-accent { gap: 3px; }
+  .logo-accent::before,
+  .logo-accent::after { width: 5px; }
+  .logo-mark svg,
+  .logo-mark img { height: min(var(--brand-size, 44px), 28px); max-width: 60px; }
+}
+
+@media (max-width: 386px) {
+  .logo-text { display: none; }
+  .logo-mark svg,
+  .logo-mark img { max-width: 56px; }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
