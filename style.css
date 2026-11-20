@@ -35,7 +35,7 @@
   --header-height: 72px;
 }
 
-/* ---------- Base ---------- */
+/*  Base  */
 * {
   box-sizing: border-box;
 }
@@ -94,7 +94,7 @@ code {
   background: rgba(255, 0, 212, 0.35);
 }
 
-/* ---------- Background layers ---------- */
+/*  Background layers  */
 .bg-grid,
 .bg-glow,
 .bg-scanlines {
@@ -133,7 +133,7 @@ code {
   );
 }
 
-/* ---------- Header and navigation ---------- */
+/*  Header and navigation  */
 .site-header {
   position: sticky;
   top: 0;
@@ -172,7 +172,7 @@ code {
   color: var(--color-text);
 }
 
-/* Main logo (set in branding.js, SITE_LOGOS.main). Its height is the logo size. */
+/* Main logo (set in Logos&Functions.js, SITE_LOGOS.main). Its height is the logo size. */
 .logo-mark {
   display: inline-flex;
   align-items: center;
@@ -207,7 +207,7 @@ code {
   white-space: nowrap;
 }
 
-/* Colors follow the main logo. branding.js sets these variables from the
+/* Colors follow the main logo. Logos&Functions.js sets these variables from the
    logo's main color; without them, the SUBNET ZERO wordmark colors are used. */
 .logo-line {
   color: var(--logo-text-main, var(--color-text));
@@ -346,8 +346,8 @@ code {
   color: var(--color-cyan);
 }
 
-/* ---------- Pages ---------- */
-/* Pages hidden by script.js */
+/*  Pages  */
+/* Pages hidden by MajorFunctions.js */
 .page[hidden] {
   display: none;
 }
@@ -397,7 +397,7 @@ code {
   letter-spacing: 0.06em;
 }
 
-/* ---------- Buttons ---------- */
+/*  Buttons  */
 button,
 .btn {
   display: inline-flex;
@@ -476,7 +476,7 @@ a:focus-visible {
   background: var(--color-cyan);
 }
 
-/* ---------- Home: hero ---------- */
+/*  Home: hero  */
 .hero {
   padding: 90px 0 70px;
 }
@@ -593,7 +593,7 @@ a:focus-visible {
   50% { opacity: 0; }
 }
 
-/* ---------- Home: project cards ---------- */
+/*  Home: project cards  */
 .cards-section {
   padding: 30px 0 90px;
   scroll-margin-top: var(--header-height);
@@ -775,12 +775,12 @@ a:focus-visible {
   text-align: right;
 }
 
-/* ---------- Project card themes ----------
+/*  Project card themes 
    Set with data-card-theme on a card in index.html:
    "street" (Project 01), "military" (Project 02), "medical" (Project 03),
    "corp" (Project 04). */
 
-/* --- Street kid: graffiti marker font, hot pink and yellow, tape and spray --- */
+/*  Street kid: graffiti marker font, hot pink and yellow, tape and spray  */
 .assignment-card[data-card-theme="street"] {
   --street-pink: #ff2fa8;
   --street-yellow: #ffe500;
@@ -869,7 +869,7 @@ a:focus-visible {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(255, 47, 168, 0.25);
 }
 
-/* --- Cyberpunk military: stencil font, olive and amber, hazard stripes --- */
+/*  Cyberpunk military: stencil font, olive and amber, hazard stripes  */
 .assignment-card[data-card-theme="military"] {
   --mil-olive: #a8bf5a;
   --mil-amber: #ffb800;
@@ -955,8 +955,8 @@ a:focus-visible {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(168, 191, 90, 0.2);
 }
 
-/* --- Trauma-team medical (rapid-response medics):
-       clinical white, teal, emergency red --- */
+/*  Trauma-team medical (rapid-response medics):
+       clinical white, teal, emergency red  */
 .assignment-card[data-card-theme="medical"] {
   --med-white: #f2f5f7;
   --med-teal: #00d4c8;
@@ -1061,8 +1061,8 @@ a:focus-visible {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(0, 212, 200, 0.2);
 }
 
-/* --- Red corporate-military high-tech: black and red, sharp edges,
-       wide high-tech display font --- */
+/*  Red corporate-military high-tech: black and red, sharp edges,
+       wide high-tech display font  */
 .assignment-card[data-card-theme="corp"] {
   --corp-red: #ff2a3d;
   --corp-red-soft: rgba(255, 42, 61, 0.12);
@@ -1155,7 +1155,7 @@ a:focus-visible {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 26px rgba(255, 42, 61, 0.25);
 }
 
-/* ---------- Content boxes (project pages) ---------- */
+/*  Content boxes (project pages)  */
 .box {
   position: relative;
   padding: 36px;
@@ -1275,7 +1275,7 @@ details li {
   margin: 4px 0;
 }
 
-/* ---------- Project page header (logo + title) ---------- */
+/*  Project page header (logo + title)  */
 .page-head {
   display: flex;
   align-items: center;
@@ -1298,12 +1298,12 @@ details li {
   margin-top: 14px;
 }
 
-/* ---------- Project page themes ----------
+/*  Project page themes 
    Each project page uses the same theme as its card on the Home page.
    Set with data-page-theme on the page in index.html. The theme changes
    the site's color and font variables, so every part of the page follows. */
 
-/* --- Street kid (Project 01) --- */
+/*  Street kid (Project 01)  */
 [data-page-theme="street"] {
   --color-cyan: #ffe500;
   --color-magenta: #ff2fa8;
@@ -1350,7 +1350,7 @@ details li {
   color: var(--color-magenta);
 }
 
-/* --- Cyberpunk military (Project 02) --- */
+/*  Cyberpunk military (Project 02)  */
 [data-page-theme="military"] {
   --color-cyan: #ffb800;
   --color-magenta: #a8bf5a;
@@ -1389,7 +1389,7 @@ details li {
   color: #a8bf5a;
 }
 
-/* --- Trauma-team medical (Project 03) --- */
+/*  Trauma-team medical (Project 03)  */
 [data-page-theme="medical"] {
   --color-cyan: #00d4c8;
   --color-magenta: #ff2a3d;
@@ -1435,7 +1435,7 @@ details li {
   background: #ff2a3d;
 }
 
-/* --- Red corporate-military high-tech (Project 04) --- */
+/*  Red corporate-military high-tech (Project 04)  */
 [data-page-theme="corp"] {
   --color-cyan: #ff2a3d;
   --color-magenta: #ff2a3d;
@@ -1485,7 +1485,7 @@ details li {
   color: #ffffff;
 }
 
-/* ---------- Forms ---------- */
+/*  Forms  */
 label {
   display: block;
   margin-bottom: 6px;
@@ -1549,7 +1549,7 @@ select option {
   min-width: 200px;
 }
 
-/* ---------- Results and errors ---------- */
+/*  Results and errors  */
 .result:empty {
   display: none;
 }
@@ -1587,7 +1587,7 @@ select option {
   font-weight: 600;
 }
 
-/* ---------- Tables ---------- */
+/*  Tables  */
 .table-wrap {
   overflow-x: auto;
   border: 1px solid var(--color-border);
@@ -1636,7 +1636,7 @@ tr.total-row td {
   color: var(--color-text);
 }
 
-/* ---------- Project 2: Income tax ---------- */
+/*  Project 2: Income tax  */
 .tax-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1748,7 +1748,7 @@ tr.current-bracket td:first-child {
   box-shadow: inset 3px 0 0 var(--color-magenta);
 }
 
-/* ---------- Project 3: Loop result cards ---------- */
+/*  Project 3: Loop result cards  */
 /* The three cards are stacked: Factorial, then Sum, then Average */
 .loop-grid {
   display: grid;
@@ -1817,14 +1817,7 @@ tr.current-bracket td:first-child {
   border-radius: 0;
 }
 
-/* ---------- Project 4: Payroll (payslip on the left, form on the right) ---------- */
-.payroll-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  align-items: start;
-}
-
+/*  Project 4: shared form styles  */
 .panel-title {
   font-family: var(--font-display);
   font-size: 1rem;
@@ -1832,142 +1825,14 @@ tr.current-bracket td:first-child {
   margin-bottom: 2px;
 }
 
-.payroll-form {
-  margin-bottom: 0;
-}
-
-.payroll-form .hint {
-  margin: 0 0 16px;
-}
-
-/* Two fields per row inside the form */
+/* Two fields per row inside a form */
 .field-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0 16px;
 }
 
-.field-hint {
-  margin: -10px 0 14px;
-  font-size: 0.78rem;
-  color: var(--color-muted);
-}
-
-/* Payslip card */
-.payslip {
-  position: sticky;
-  top: calc(var(--header-height) + 16px);
-  background: rgba(10, 10, 24, 0.85);
-  border: 1px solid var(--color-border-strong);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 0 30px rgba(139, 92, 246, 0.12);
-}
-
-.payslip-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 12px;
-  padding: 18px 20px;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.28), rgba(0, 245, 255, 0.08));
-  border-bottom: 2px solid transparent;
-  border-image: var(--gradient-neon) 1;
-}
-
-.payslip-label {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-cyan);
-}
-
-.payslip-name {
-  margin: 2px 0 0;
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 700;
-  overflow-wrap: anywhere;
-}
-
-.payslip-meta {
-  margin: 2px 0 0;
-  font-size: 0.82rem;
-  color: var(--color-muted);
-}
-
-.payslip-rate {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--color-cyan);
-  white-space: nowrap;
-}
-
-.payslip-body {
-  padding: 6px 20px 20px;
-}
-
-.payslip-empty {
-  margin: 14px 0 0;
-  color: var(--color-muted);
-}
-
-.payslip-line {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
-}
-
-.payslip-line .amount {
-  font-family: var(--font-mono);
-  white-space: nowrap;
-}
-
-.payslip-line.total {
-  font-weight: 700;
-}
-
-.payslip-line.deduct .amount {
-  color: var(--color-magenta);
-}
-
-/* Small grey note under a line, e.g. "10 hrs × ₱142.05 (1.25×)" */
-.payslip-note {
-  margin: -4px 0 0;
-  padding-bottom: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--color-muted);
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
-}
-
-.payslip-net {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-top: 18px;
-  padding: 18px 20px;
-  font-weight: 700;
-  background: rgba(0, 245, 255, 0.07);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius);
-  box-shadow: inset 0 0 20px rgba(0, 245, 255, 0.08);
-}
-
-.payslip-net-amount {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  color: var(--color-cyan);
-  text-shadow: var(--glow-cyan);
-}
-
-/* ---------- Project 4: Payroll list (add / delete) ---------- */
+/*  Project 4: Payroll list (add / delete)  */
 .section-title-first {
   margin-top: 0;
 }
@@ -2008,7 +1873,7 @@ tr.current-bracket td:first-child {
   margin-top: 18px;
 }
 
-/* ---------- About ---------- */
+/*  About  */
 .about-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -2050,7 +1915,7 @@ tr.current-bracket td:first-child {
   margin-top: 22px;
 }
 
-/* ---------- Previous / next project links ---------- */
+/*  Previous / next project links  */
 .project-nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2096,9 +1961,9 @@ tr.current-bracket td:first-child {
   text-align: right;
 }
 
-/* ---------- Branding: logo slots ----------
+/*  Branding: logo slots 
    Elements with data-brand-slot show a logo that can be changed
-   on the Branding page (see branding.js). */
+   on the Branding page (see Logos&Functions.js). */
 
 /* Uploaded logos keep their shape (no stretching) */
 [data-brand-slot] img {
@@ -2167,7 +2032,7 @@ tr.current-bracket td:first-child {
   height: auto;
 }
 
-/* ---- Logo drawing styles (used by the SVG logos in SITE_LOGOS) ---- */
+/*  Logo drawing styles (used by the SVG logos in SITE_LOGOS)  */
 .lg-text {
   font-family: var(--font-display);
   font-size: 30px;
@@ -2284,7 +2149,7 @@ tr.current-bracket td:first-child {
   transform: rotate(60deg);
 }
 
-/* ---------- Branding settings page ---------- */
+/*  Branding settings page  */
 .brand-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -2558,7 +2423,7 @@ tr.current-bracket td:first-child {
   border-color: var(--color-cyan);
 }
 
-/* ---------- Footer ---------- */
+/*  Footer  */
 .site-footer {
   position: relative;
   z-index: 1;
@@ -2575,7 +2440,7 @@ tr.current-bracket td:first-child {
   margin: 0;
 }
 
-/* ---------- Responsive: tablet ---------- */
+/*  Responsive: tablet  */
 @media (max-width: 900px) {
   .hero { padding: 60px 0 50px; }
   .hero-inner { grid-template-columns: 1fr; gap: 36px; }
@@ -2588,13 +2453,9 @@ tr.current-bracket td:first-child {
   .logo-mark img { height: min(var(--brand-size, 44px), 48px); max-width: 120px; }
   .logo-text { font-size: 0.86rem; }
 
-  /* Payroll: form first, then the payslip */
-  .payroll-layout { grid-template-columns: 1fr; }
-  .payroll-form { order: -1; }
-  .payslip { position: static; }
 }
 
-/* ---------- Responsive: mobile ---------- */
+/*  Responsive: mobile  */
 @media (max-width: 640px) {
   :root { --header-height: 64px; }
 

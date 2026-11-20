@@ -4,27 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CS 1130 – Introduction to Computing</title>
-  <!-- Fonts (if offline, the page falls back to system fonts) -->
+  <!-- Mga fonts pag offline, kani ang gamiton  -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Exo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Saira+Stencil+One&family=Russo+One&family=Permanent+Marker&family=Black+Ops+One&family=Michroma&display=swap">
-  <!-- Browser tab icon (can be changed on the Branding page) -->
+  <!--kani ang browser icon and ma change sya. Ps. Ang mga logos gi gamit nako ang ai to remove ang backrounds nila -->
   <link rel="icon" id="favicon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2714%27%20fill%3D%27%23080812%27/%3E%3Crect%20x%3D%273%27%20y%3D%273%27%20width%3D%2758%27%20height%3D%2758%27%20rx%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%2300f5ff%27%20stroke-width%3D%273%27/%3E%3Cpath%20d%3D%27M24%2022%2014%2032l10%2010M40%2022l10%2010-10%2010M35%2018l-6%2028%27%20fill%3D%27none%27%20stroke%3D%27%2300f5ff%27%20stroke-width%3D%274%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27/%3E%3C/svg%3E">
   <!-- External stylesheet: controls the look of the page -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Decorative background layers (grid, glow, scanlines) -->
+  <!-- kani ang mga decorative bg layers like mga glow, grid ug scanlines -->
   <div class="bg-grid" aria-hidden="true"></div>
   <div class="bg-glow" aria-hidden="true"></div>
   <div class="bg-scanlines" aria-hidden="true"></div>
 
-  <!-- ========== HEADER & NAVIGATION ========== -->
+  <!--  Ofc kani ang Header ug Navigation  -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="#home" aria-label="Home">
-        <span class="logo-mark" data-brand-slot="main"><!-- logo set in branding.js (SITE_LOGOS.main) --></span>
+        <span class="logo-mark" data-brand-slot="main"><!-- logo set in Logos&amp;Functions.js (SITE_LOGOS.main) --></span>
         <span class="logo-text"><span class="logo-line">Wake Up,</span> <span class="logo-accent">Choom</span></span>
       </a>
       <nav class="main-nav">
@@ -47,10 +47,10 @@
     </div>
   </header>
 
-  <!-- Each "page" below is shown one at a time by script.js -->
+  <!-- Each "page" below is shown one at a time by MajorFunctions.js -->
   <main>
 
-    <!-- ========== HOME (front page) ========== -->
+    <!--  HOME (front page)  -->
     <div class="page" data-page="home">
 
       <!-- Hero -->
@@ -86,8 +86,8 @@
         </div>
       </section>
 
-      <!-- Project cards: cards fill the left column first (1, 2), then the right (3, 4).
-           Copy one card block to add another card. -->
+      <!-- Project cards: cards na naga fill sa left column una (1, 2), sunod sa right (3, 4).
+           Gina copy ang one card block to add another card -->
       <section class="cards-section" id="projects">
         <div class="container">
           <div class="section-heading">
@@ -99,7 +99,7 @@
 
             <div class="assignment-card" data-card-theme="street">
               <div class="card-top">
-                <span class="card-icon" data-brand-slot="project1"><!-- logo set in branding.js (SITE_LOGOS.project1) --></span>
+                <span class="card-icon" data-brand-slot="project1"><!-- logo gikan sa Logos&Function.js (SITE_LOGOS.project1) --></span>
                 <span class="card-badge">PROJECT 01</span>
               </div>
               <h3>Conversion Calculator</h3>
@@ -117,7 +117,7 @@
 
             <div class="assignment-card" data-card-theme="military">
               <div class="card-top">
-                <span class="card-icon" data-brand-slot="project2"><!-- logo set in branding.js (SITE_LOGOS.project2) --></span>
+                <span class="card-icon" data-brand-slot="project2"><!-- logo gikan sa Logos&Function.js (SITE_LOGOS.project2) --></span>
                 <span class="card-badge">PROJECT 02</span>
               </div>
               <h3>Income Tax Calculator</h3>
@@ -133,7 +133,7 @@
 
             <div class="assignment-card" data-card-theme="medical">
               <div class="card-top">
-                <span class="card-icon" data-brand-slot="project3"><!-- logo set in branding.js (SITE_LOGOS.project3) --></span>
+                <span class="card-icon" data-brand-slot="project3"><!-- logo gikan sa Logos&Function.js (SITE_LOGOS.project3) --></span>
                 <span class="card-badge">PROJECT 03</span>
               </div>
               <h3>Mathematical Operations Using Loops</h3>
@@ -150,15 +150,15 @@
 
             <div class="assignment-card" data-card-theme="corp">
               <div class="card-top">
-                <span class="card-icon" data-brand-slot="project4"><!-- logo set in branding.js (SITE_LOGOS.project4) --></span>
+                <span class="card-icon" data-brand-slot="project4"><!-- logo gikan sa Logos&Function.js (SITE_LOGOS.project4) --></span>
                 <span class="card-badge">PROJECT 04</span>
               </div>
               <h3>Simple Payroll System</h3>
-              <p class="card-sentence">Compute an employee's gross salary, deductions, and net salary.</p>
+              <p class="card-sentence">Add and delete employees in a payroll list with their gross and net pay.</p>
               <ul class="card-items">
-                <li><span>Gross salary</span></li>
-                <li><span>Total deductions</span></li>
-                <li><span>Net salary</span></li>
+                <li><span>Gross pay</span></li>
+                <li><span>Deduction amount</span></li>
+                <li><span>Net pay</span></li>
               </ul>
               <div class="card-footer">
                 <a class="btn btn-small" href="#assignment4">Open project <span aria-hidden="true">→</span></a>
@@ -170,7 +170,7 @@
       </section>
     </div>
 
-    <!-- ========== ABOUT ========== -->
+    <!--  ABOUT  -->
     <div class="page" data-page="about" hidden>
       <div class="container page-content">
         <article class="box">
@@ -179,8 +179,8 @@
               <p class="eyebrow">// System Info</p>
               <h2 class="page-title">About</h2>
             </div>
-            <!-- University logo (can be changed on the Branding page) -->
-            <span class="uni-logo" data-brand-slot="university" title="University logo"><!-- logo set in branding.js (SITE_LOGOS.university) --></span>
+            <!-- ma change ang mga logo -->
+            <span class="uni-logo" data-brand-slot="university" title="University logo"><!-- logo gikan sa Logos&Function.js (SITE_LOGOS.university) --></span>
           </div>
           <p class="page-intro">
             This website contains the four class projects, built with HTML
@@ -213,8 +213,8 @@
       </div>
     </div>
 
-    <!-- ========== BRANDING SETTINGS ========== -->
-    <!-- The logo cards inside #brandingSlots are built by branding.js -->
+    <!--  BRANDING SETTINGS  -->
+    <!-- gikan built ug logo cards sa Logos&Function.js -->
     <div class="page" data-page="branding" hidden>
       <div class="container page-content">
         <article class="box">
@@ -234,12 +234,12 @@
       </div>
     </div>
 
-    <!-- ========== PROJECT PAGES ========== -->
+    <!--  PROJECT PAGES  -->
     <div class="container page-content">
 
-        <!-- ===== Project #1: Conversion ===== -->
+        <!--  Project #1: Conversion  -->
         <article class="box page" data-page="assignment1" data-page-theme="street" hidden>
-          <!-- Page header: project logo (set in branding.js, SITE_LOGOS.project1) and title -->
+          <!-- Page header: project logo (set in Logos&amp;Functions.js, SITE_LOGOS.project1) and title -->
           <div class="page-head">
             <span class="card-icon page-logo" data-brand-slot="project1"></span>
             <div>
@@ -279,7 +279,7 @@
             </ul>
           </details>
 
-          <!-- Links to the previous and next project -->
+          <!-- Links para mu adto sa previous ug next project to the previous and next project -->
           <nav class="project-nav">
             <a class="project-nav-link" href="#home">
               <span class="hint">← Back</span>
@@ -294,7 +294,7 @@
 
         <!-- ===== Project #2: Income Tax ===== -->
         <article class="box page" data-page="assignment2" data-page-theme="military" hidden>
-          <!-- Page header: project logo (set in branding.js, SITE_LOGOS.project2) and title -->
+          <!-- Page header: project logo (set in Logos&Functions.js, SITE_LOGOS.project2) ug title -->
           <div class="page-head">
             <span class="card-icon page-logo" data-brand-slot="project2"></span>
             <div>
@@ -307,7 +307,7 @@
             By default it uses the <strong>table given in the assignment</strong> (TRAIN Law
             rates for 2018–2022). You can switch to the <strong>current table</strong>
             (2023 onward), which is the one in effect in 2026. Both tables are stored in
-            <code>TAX_TABLES</code> inside <code>script.js</code> and can be edited.
+            <code>TAX_TABLES</code> inside <code>MajorFunctions.js</code> and can be edited.
           </p>
 
           <!-- Left: inputs. Right: summary of results. -->
@@ -320,14 +320,14 @@
                 SSS, PhilHealth, and Pag-IBIG contributions in the deductions box.
               </p>
 
-              <!-- Which tax table to use -->
+              <!-- Anong tax table na gamitin -->
               <label for="taxTableSelect">Tax table</label>
               <select id="taxTableSelect">
                 <option value="assignment">Assignment table (TRAIN Law, 2018–2022)</option>
                 <option value="current">Current table (TRAIN Law, 2023 onward)</option>
               </select>
 
-              <!-- Monthly / Annual switch. The chosen value is kept in the hidden input. -->
+              <!-- Monthly / Annual switch. mga value na pinili na tinatago sa hidden input -->
               <div class="toggle-group" role="group" aria-label="Income period">
                 <button type="button" class="toggle-button" data-period="monthly">Monthly</button>
                 <button type="button" class="toggle-button active" data-period="annual">Annual</button>
@@ -376,7 +376,7 @@
             individuals or other special cases.
           </p>
 
-          <!-- Links to the previous and next project -->
+          <!-- Links pa punta sa previous at next project -->
           <nav class="project-nav">
             <a class="project-nav-link" href="#assignment1">
               <span class="hint">← Previous project</span>
@@ -389,9 +389,9 @@
           </nav>
         </article>
 
-        <!-- ===== Project #3: Loops ===== -->
+        <!--  Project #3: Loops  -->
         <article class="box page" data-page="assignment3" data-page-theme="medical" hidden>
-          <!-- Page header: project logo (set in branding.js, SITE_LOGOS.project3) and title -->
+          <!-- Page header: project logo (set in Logos&Functions.js, SITE_LOGOS.project3) ug title -->
           <div class="page-head">
             <span class="card-icon page-logo" data-brand-slot="project3"></span>
             <div>
@@ -470,7 +470,7 @@ let average = total / n;</code></pre>
             0! = 1 by definition; the sum and average of zero numbers are shown as 0.
           </p>
 
-          <!-- Links to the previous and next project -->
+          <!-- Links pa punta sa previous at next project -->
           <nav class="project-nav">
             <a class="project-nav-link" href="#assignment2">
               <span class="hint">← Previous project</span>
@@ -483,9 +483,9 @@ let average = total / n;</code></pre>
           </nav>
         </article>
 
-        <!-- ===== Project #4: Payroll ===== -->
+        <!--  Project #4: Payroll  -->
         <article class="box page" data-page="assignment4" data-page-theme="corp" hidden>
-          <!-- Page header: project logo (set in branding.js, SITE_LOGOS.project4) and title -->
+          <!-- Page header: project logo (set in Logos&Functions.js, SITE_LOGOS.project4) ug title -->
           <div class="page-head">
             <span class="card-icon page-logo" data-brand-slot="project4"></span>
             <div>
@@ -494,11 +494,10 @@ let average = total / n;</code></pre>
             </div>
           </div>
           <p class="page-intro">
-            Add employees to a payroll list and delete them by line number. Below the list
-            is a detailed monthly payslip calculator.
+            Add employees to a payroll list and delete them by line number.
           </p>
 
-          <!-- ===== Payroll list: add and delete employees ===== -->
+          <!--  Payroll list: ga add ug delete sa employees  -->
           <h4 class="section-title section-title-first">Payroll List</h4>
           <div class="panel" id="payListForm">
             <h4 class="panel-title">Add an employee</h4>
@@ -552,79 +551,7 @@ let average = total / n;</code></pre>
             <div class="result" id="plDeleteMessage"></div>
           </div>
 
-          <!-- ===== Detailed monthly payslip ===== -->
-          <h4 class="section-title">Detailed Monthly Payslip</h4>
-          <p class="hint">
-            Enter the employee's details for one month. Rates (overtime, contributions)
-            are stored in <code>PAYROLL_CONFIG</code> inside <code>script.js</code> and can be edited.
-          </p>
-
-          <!-- Left: payslip (updates as you type). Right: the input form. -->
-          <div class="payroll-layout">
-
-            <!-- Payslip -->
-            <div class="payslip" aria-live="polite">
-              <div class="payslip-header">
-                <div>
-                  <p class="payslip-label">Payslip</p>
-                  <p class="payslip-name" id="payslipName">Employee name</p>
-                  <p class="payslip-meta" id="payslipMeta">ID · Position</p>
-                </div>
-                <p class="payslip-rate" id="payslipRate">₱0.00 / hour</p>
-              </div>
-              <div class="payslip-body" id="payslipBody">
-                <p class="payslip-empty">Enter the basic monthly salary to see the payslip.</p>
-              </div>
-            </div>
-
-            <!-- Form -->
-            <div class="panel payroll-form">
-              <h4 class="panel-title">Employee &amp; hours</h4>
-              <p class="hint">Fill in the details for one month.</p>
-
-              <label for="empName">Employee name</label>
-              <input type="text" id="empName" placeholder="e.g. Juan Dela Cruz">
-
-              <div class="field-grid">
-                <div>
-                  <label for="empId">Employee ID</label>
-                  <input type="text" id="empId" placeholder="e.g. EMP-001">
-                </div>
-                <div>
-                  <label for="empPosition">Position</label>
-                  <input type="text" id="empPosition" placeholder="e.g. Clerk">
-                </div>
-                <div>
-                  <label for="basicSalary">Basic monthly salary (₱)</label>
-                  <input type="number" id="basicSalary" min="0" step="any" placeholder="e.g. 25000">
-                </div>
-                <div>
-                  <label for="overtimeHours">Overtime hours</label>
-                  <input type="number" id="overtimeHours" min="0" step="any" value="0">
-                  <p class="field-hint" id="overtimeHint">Paid at 1.25× the hourly rate</p>
-                </div>
-                <div>
-                  <label for="allowance">Allowance (₱)</label>
-                  <input type="number" id="allowance" min="0" step="any" value="0">
-                </div>
-                <div>
-                  <label for="otherDeductions">Other deductions (₱)</label>
-                  <input type="number" id="otherDeductions" min="0" step="any" value="0">
-                  <p class="field-hint">e.g. loans, cash advances</p>
-                </div>
-              </div>
-
-              <button type="button" id="payrollButton">Compute Payroll</button>
-              <div class="result" id="payrollResult"></div>
-            </div>
-          </div>
-
-          <details>
-            <summary>Formulas used</summary>
-            <ul id="payrollFormulaList"></ul>
-          </details>
-
-          <!-- Links to the previous and next project -->
+          <!-- Links pa punta sa previous at next project -->
           <nav class="project-nav">
             <a class="project-nav-link" href="#assignment3">
               <span class="hint">← Previous project</span>
@@ -643,16 +570,16 @@ let average = total / n;</code></pre>
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <span class="uni-logo uni-logo-small" data-brand-slot="university" title="University logo"><!-- logo set in branding.js (SITE_LOGOS.university) --></span>
+        <span class="uni-logo uni-logo-small" data-brand-slot="university" title="University logo"><!-- logo set in Logos&amp;Functions.js (SITE_LOGOS.university) --></span>
         <p>CS 1130 – Introduction to Computing · Student Projects</p>
         <a class="footer-link" href="#branding">Branding settings</a>
       </div>
     </div>
   </footer>
 
-  <!-- External JavaScript: adds behavior and calculations -->
-  <script src="script.js"></script>
-  <!-- Logo customization (kept separate from the calculators) -->
-  <script src="branding.js"></script>
+  <!-- External JavaScript: kani ga add ug behavior and calculations -->
+  <script src="MajorFunctions.js"></script>
+  <!-- Logo customization (gina separate from the calculators) -->
+  <script src="Logos&amp;Functions.js"></script>
 </body>
 </html>
